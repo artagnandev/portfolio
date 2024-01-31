@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Sora } from 'next/font/google'
 
-import "@/styles/main.scss"
+import "@/src/styles/main.scss"
 
 const sora = Sora({
   weight: ["300", "400", "500", "700", "800"],

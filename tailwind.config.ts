@@ -4,10 +4,11 @@ import { fontFamily } from "tailwindcss/defaultTheme"
 const config: Config = {
   theme: {
     colors: {
-      blue: "#0167FF",
-      rose: "#FB55A5",
       black: "#000000",
       white: "#FFFFFF",
+      primary: "#0167FF",
+      secondary: "#FB55A5",
+      tertiary: "#7B61FF",
       current: "currentColor",
       transparent: "transparent",
     },
@@ -28,10 +29,7 @@ const config: Config = {
       padding: "1rem",
       screens: {
         sm: "950px",
-        md: "970px",
-        lg: "970px",
-        xl: "1000px",
-        "2xl": "1000px",
+        md: "1200px",
       }
     },
 
@@ -44,9 +42,9 @@ const config: Config = {
   },
 
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{jsx,tsx,mdx}',
+    './src/layouts/**/*.{jsx,tsx,mdx}',
+    './src/components/**/*.{jsx,tsx,mdx}',
   ],
 
   plugins: [],
