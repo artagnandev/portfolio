@@ -1,8 +1,10 @@
-import { Hero, About, Skills, Works, Contact } from "../layouts";
+import { Hero, About, Skills, Works, Contact, Footer, Header } from "../layouts";
 
 export default function Home() {
   return (
     <main className="relative">
+      <Header />
+
       <Hero />
 
       {/* <About /> */}
@@ -12,6 +14,8 @@ export default function Home() {
       <Works />
 
       <Contact />
+
+      <Footer />
     </main>
   )
 }

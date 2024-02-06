@@ -2,7 +2,7 @@ import Slider from "./slider";
 
 export default function Works() {
   return (
-    <section className="works overflow-x-hidden">
+    <section id="meus-trabalhos" className="overflow-x-hidden">
       <div className="container my-20">
         <div className="w-full max-w-[500px]">
           <p className="text-primary uppercase font-semibold font-inter mb-2 text-xs tracking-widest">

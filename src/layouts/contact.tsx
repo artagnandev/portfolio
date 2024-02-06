@@ -21,7 +21,7 @@ const links = [
 
 export default function Contact() {
   return (
-    <section className="works overflow-x-hidden">
+    <section id="contato" className="overflow-x-hidden">
       <div className="container my-20">
         <div className="w-full max-w-[500px]">
           <p className="text-primary uppercase font-semibold font-inter mb-2 text-xs tracking-widest">

@@ -2,4 +2,8 @@
 
 @import "tailwindcss/components";
 
+html {
+  @apply scroll-smooth scroll-pt-24;
+}
+
 @import "tailwindcss/utilities";
