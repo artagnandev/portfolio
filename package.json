@@ -15,7 +15,8 @@
     "react-dom": "^18",
     "react-rellax": "^1.0.3",
     "react-tilt": "^1.0.2",
-    "sass": "^1.69.4"
+    "sass": "^1.69.4",
+    "swiper": "^11.0.6"
   },
   "devDependencies": {
     "@types/node": "^20",

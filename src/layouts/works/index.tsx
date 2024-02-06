@@ -1,6 +1,8 @@
+import Slider from "./slider";
+
 export default function Works() {
   return (
-    <section className="works">
+    <section className="works overflow-x-hidden">
       <div className="container my-20">
         <div className="w-full max-w-[500px]">
           <p className="text-primary uppercase font-semibold font-inter mb-2 text-xs tracking-widest">
@@ -11,6 +13,8 @@ export default function Works() {
             Meus trabalhos
           </h2>
         </div>
+
+        <Slider />
       </div>
     </section>
   )

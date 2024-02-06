@@ -1,4 +1,4 @@
-import { Hero, About, Skills, Works } from "../layouts";
+import { Hero, About, Skills, Works, Contact } from "../layouts";
 
 export default function Home() {
   return (
@@ -10,6 +10,8 @@ export default function Home() {
       <Skills />
 
       <Works />
+
+      <Contact />
     </main>
   )
 }
