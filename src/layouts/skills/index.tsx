@@ -1,20 +1,19 @@
-import Image from "next/image"
-import Tabs from "./tabs"
+import Image from "next/image";
+import Tabs from "./tabs";
 
 export default function Skills() {
   return (
     <section id="linguagens-e-ferramentas">
-      <div className="container flex justify-between items-center relative py-24">
-        <div className="w-full max-w-[500px]">
+      <div className="container flex justify-between items-center relative py-24 max-lg:flex-col">
+        <div className="w-full max-w-[500px] max-lg:flex max-lg:flex-col max-lg:items-center max-lg:text-center">
           <p className="text-primary uppercase font-semibold font-inter mb-2 text-xs tracking-widest">
             # Skills
           </p>
 
           <h2 className="text-3xl font-bold mb-12 tracking-wider">
-            Linguagens <br />
-            e ferramentas
+            Linguagens <br />e ferramentas
           </h2>
-          
+
           <Tabs />
         </div>
 
@@ -74,5 +73,5 @@ export default function Skills() {
         </div>
       </div>
     </section>
-  )
+  );
 }

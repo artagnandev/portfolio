@@ -1,23 +1,24 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative flex items-center h-[80vh] pb-20">
+    <section
+      id="inicio"
+      className="relative flex items-center h-[80vh] pb-20 overflow-x-hidden max-lg:h-max max-lg:py-20"
+    >
       <Image
         alt=""
         src="/svgs/mesh-hero.svg"
         fill
         priority
-        className="h-full absolute top-0 left-0"
+        className="h-full absolute top-0 left-0 max-lg:object-cover"
       />
 
-      <div className="container flex items-center justify-between relative z-10">
-        <div className="flex flex-col gap-4">
-          <p className="text-sm uppercase font-light">
-            Olá 👋, eu sou
-          </p>
+      <div className="container flex items-center justify-between relative z-10 max-lg:flex-col">
+        <div className="flex flex-col gap-4 max-lg:mb-20 max-lg:text-center">
+          <p className="text-sm uppercase font-light">Olá 👋, eu sou</p>
 
-          <h1 className="text-4xl font-black">
+          <h1 className="text-4xl font-black max-xs:text-3xl">
             David <br />
             Artagnan
           </h1>
@@ -25,13 +26,17 @@ export default function Hero() {
           <h2 className="text-lg font-semibold mb-6">Dev front-end</h2>
 
           <p className="text-white/70 font-light">
-            Programador com <b className="text-black font-medium bg-secondary px-1">+3 anos de experiência</b>,
+            Programador com{" "}
+            <b className="text-black font-medium bg-secondary px-1">
+              +3 anos de experiência
+            </b>
+            ,
             <br />
             morando no Brasil.
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative max-lg:scale-90">
           <div className="flex h-[280px] relative z-10 p-3 rounded-lg border border-solid border-primary/50 bg-primary/5 backdrop-blur-lg min-w-[440px]">
             <Image
               alt=""
@@ -49,10 +54,18 @@ export default function Hero() {
               </div>
 
               <div className="flex flex-col gap-3">
-                <p className="text-xs uppercase opacity-80 font-medium font-inter">David R. Artagnan</p>
-                <p className="text-xs uppercase opacity-80 font-medium font-inter">20 anos</p>
-                <p className="text-xs uppercase opacity-80 font-medium font-inter">Brasileiro</p>
-                <p className="text-xs uppercase opacity-80 font-medium font-inter">+3 anos de experiência</p>
+                <p className="text-xs uppercase opacity-80 font-medium font-inter">
+                  David R. Artagnan
+                </p>
+                <p className="text-xs uppercase opacity-80 font-medium font-inter">
+                  20 anos
+                </p>
+                <p className="text-xs uppercase opacity-80 font-medium font-inter">
+                  Brasileiro
+                </p>
+                <p className="text-xs uppercase opacity-80 font-medium font-inter">
+                  +3 anos de experiência
+                </p>
               </div>
             </div>
           </div>
@@ -63,5 +76,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
