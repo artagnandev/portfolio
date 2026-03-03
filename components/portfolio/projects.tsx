@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
 import {
@@ -22,7 +22,7 @@ type Project = {
   title: string;
   shortDescription: string;
   fullDescription: string[];
-  image: string;
+  images: string[];
   tags: string[];
   features: string[];
   liveUrl?: string;
@@ -31,98 +31,38 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "Sistema de Gestão Empresarial",
+    title: "BomDia (Web + Mobile)",
     shortDescription:
-      "Plataforma completa para gerenciamento de processos internos, com dashboards interativos e relatórios em tempo real.",
+      "Simplifica fluxos de trabalho de campo com coleta mobile de dados da obra e relatórios diários em tempo real.",
     fullDescription: [
-      "Sistema web desenvolvido para otimizar a gestão de processos internos de empresas de médio porte, com foco em usabilidade e performance.",
-      "A plataforma inclui dashboards interativos com gráficos e métricas em tempo real, permitindo tomada de decisão baseada em dados.",
-      "Implementação de autenticação robusta, controle de permissões por perfil e histórico completo de auditoria.",
+      "O BomDia simplifica os fluxos de trabalho de campo através da coleta direta, fácil e via mobile dos dados da obra, gerando, em tempo real, relatórios diários precisos que ajudarão a ter insights importantes para as decisões de gerenciamento da obra.",
     ],
-    image: "/placeholder.svg",
-    tags: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
+    images: [
+      "/project-images/bomdia-1.png",
+      "/project-images/bomdia-2.png",
+      "/project-images/bomdia-3.png",
+      "/project-images/bomdia-4.png",
+      "/project-images/bomdia-5.png",
+      "/project-images/bomdia-6.png",
+    ],
+    tags: [
+      "React",
+      "TypeScript",
+      "React Native",
+      "Material UI",
+      "Tailwind CSS",
+    ],
     features: [
-      "Dashboards interativos com gráficos em tempo real",
-      "Controle de acesso baseado em perfis",
-      "Relatórios exportáveis em PDF e Excel",
-      "Notificações em tempo real via WebSocket",
-      "Interface responsiva e acessível",
-    ],
-  },
-  {
-    title: "App de Delivery Mobile",
-    shortDescription:
-      "Aplicativo mobile para delivery com rastreamento em tempo real, catálogo de produtos e sistema de pagamento integrado.",
-    fullDescription: [
-      "Aplicativo mobile desenvolvido com React Native para plataformas iOS e Android, focado na experiência do usuário final.",
-      "Integração com APIs de geolocalização para rastreamento em tempo real de pedidos, oferecendo transparência ao cliente.",
-      "Sistema de pagamento integrado com múltiplas formas de pagamento e checkout otimizado para conversão.",
-    ],
-    image: "/placeholder.svg",
-    tags: ["React Native", "TypeScript", "Expo", "Firebase"],
-    features: [
-      "Rastreamento de pedidos em tempo real",
-      "Catálogo de produtos com busca e filtros",
-      "Múltiplas formas de pagamento",
-      "Push notifications para status do pedido",
-      "Avaliação e histórico de pedidos",
-    ],
-  },
-  {
-    title: "E-commerce Institucional",
-    shortDescription:
-      "Loja virtual de alta performance com SSR, SEO otimizado e integração com gateway de pagamento.",
-    fullDescription: [
-      "E-commerce desenvolvido com Next.js utilizando Server-Side Rendering para máxima performance e otimização de SEO.",
-      "Implementação de catálogo dinâmico com filtros avançados, carrinho persistente e checkout multi-etapas.",
-      "Otimização de Core Web Vitals resultando em pontuação acima de 90 no Lighthouse em todas as métricas.",
-    ],
-    image: "/placeholder.svg",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
-    features: [
-      "Server-Side Rendering para SEO",
-      "Catálogo com filtros avançados",
-      "Carrinho persistente e checkout otimizado",
-      "Integração com gateway de pagamento",
-      "Core Web Vitals acima de 90",
-    ],
-  },
-  {
-    title: "Portal de Conteúdo WordPress",
-    shortDescription:
-      "Site institucional com CMS customizado, blog integrado e painel administrativo personalizado.",
-    fullDescription: [
-      "Portal de conteúdo desenvolvido com WordPress headless, consumindo a API REST para renderização no front-end React.",
-      "Customização completa do painel administrativo para facilitar a gestão de conteúdo pela equipe editorial.",
-      "Implementação de SEO técnico avançado, incluindo schema markup, sitemap dinâmico e otimização de imagens.",
-    ],
-    image: "/placeholder.svg",
-    tags: ["WordPress", "React", "PHP", "SEO"],
-    features: [
-      "CMS headless com API REST",
-      "Painel administrativo customizado",
-      "Blog com categorias e tags",
-      "SEO técnico avançado",
-      "Otimização de imagens automática",
-    ],
-  },
-  {
-    title: "Dashboard de Analytics",
-    shortDescription:
-      "Painel de métricas e análises com visualizações interativas e exportação de relatórios customizados.",
-    fullDescription: [
-      "Dashboard de analytics desenvolvido para consolidar dados de múltiplas fontes em uma interface unificada e intuitiva.",
-      "Gráficos interativos com drill-down, permitindo análise detalhada de métricas de negócio em diferentes granularidades.",
-      "Sistema de exportação de relatórios customizados em múltiplos formatos, com agendamento de envio automático.",
-    ],
-    image: "/placeholder.svg",
-    tags: ["React", "TypeScript", "D3.js", "Node.js"],
-    features: [
-      "Gráficos interativos com drill-down",
-      "Consolidação de múltiplas fontes de dados",
-      "Relatórios customizáveis e exportáveis",
-      "Filtros avançados por período e segmento",
-      "Agendamento de relatórios automáticos",
+      "Gráficos e tabelas interativas para análise de dados",
+      "Mapas interativos para visualização de localização de obra",
+      "Filtros e ordenação de dados para facilitar a busca",
+      "Exportação de dados em formatos CSV e Excel",
+      "Integração com sistemas de gestão de projetos",
+      "Coleta de dados de campo via dispositivos móveis",
+      "Geração de relatórios diários em tempo real",
+      "Sincronização de dados entre web e mobile",
+      "Insights para decisões de gerenciamento de obra",
+      "Interface intuitiva para equipes de campo",
     ],
   },
 ];
@@ -132,6 +72,10 @@ export function Projects() {
   const [api, setApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const [dialogApi, setDialogApi] = useState<CarouselApi>();
+  const [dialogCurrent, setDialogCurrent] = useState(0);
+  const [dialogCount, setDialogCount] = useState(0);
 
   function onApiChange(newApi: CarouselApi) {
     setApi(newApi);
@@ -147,11 +91,25 @@ export function Projects() {
     newApi.on("reInit", updateButtons);
   }
 
+  const onDialogApiChange = useCallback((newApi: CarouselApi) => {
+    setDialogApi(newApi);
+    if (!newApi) return;
+
+    const updateState = () => {
+      setDialogCurrent(newApi.selectedScrollSnap());
+      setDialogCount(newApi.scrollSnapList().length);
+    };
+
+    updateState();
+    newApi.on("select", updateState);
+    newApi.on("reInit", updateState);
+  }, []);
+
   return (
     <>
       <section
         id="projetos"
-        className="scroll-mt-24 px-6 py-24"
+        className="scroll-mt-24 px-6 py-24 relative"
         aria-labelledby="projetos-titulo"
       >
         <div className="mx-auto max-w-5xl">
@@ -213,7 +171,7 @@ export function Projects() {
                   >
                     <div className="relative aspect-video w-full overflow-hidden bg-secondary">
                       <Image
-                        src={project.image}
+                        src={project.images[0]}
                         alt={project.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -226,7 +184,7 @@ export function Projects() {
                         {project.title}
                       </h4>
 
-                      <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+                      <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">
                         {project.shortDescription}
                       </p>
 
@@ -255,6 +213,23 @@ export function Projects() {
             </CarouselContent>
           </Carousel>
         </div>
+
+        {/* Subtle grid background */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Glow effect */}
+        <div
+          className="pointer-events-none absolute top-1/4 left-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[120px]"
+          aria-hidden="true"
+        />
       </section>
 
       <Dialog
@@ -264,13 +239,61 @@ export function Projects() {
         <DialogContent className="sm:max-w-2xl max-h-[90vh] p-0 gap-0 overflow-hidden">
           {selectedProject && (
             <>
-              <div className="relative aspect-video w-full overflow-hidden bg-secondary">
-                <Image
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  fill
-                  className="object-cover"
-                />
+              <div className="relative w-full bg-secondary">
+                <Carousel
+                  opts={{ align: "start", loop: true }}
+                  setApi={onDialogApiChange}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {selectedProject.images.map((img, i) => (
+                      <CarouselItem key={i}>
+                        <div className="relative aspect-video w-full overflow-hidden">
+                          <Image
+                            src={img}
+                            alt={`${selectedProject.title} - imagem ${i + 1}`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+
+                  {dialogCount > 1 && (
+                    <>
+                      <button
+                        onClick={() => dialogApi?.scrollPrev()}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-background"
+                        aria-label="Imagem anterior"
+                      >
+                        <ChevronLeft size={16} />
+                      </button>
+                      <button
+                        onClick={() => dialogApi?.scrollNext()}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition-colors hover:bg-background"
+                        aria-label="Próxima imagem"
+                      >
+                        <ChevronRight size={16} />
+                      </button>
+
+                      <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+                        {selectedProject.images.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => dialogApi?.scrollTo(i)}
+                            className={`h-1.5 rounded-full transition-all ${
+                              i === dialogCurrent
+                                ? "w-6 bg-primary"
+                                : "w-1.5 bg-foreground/30"
+                            }`}
+                            aria-label={`Ir para imagem ${i + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </Carousel>
               </div>
 
               <ScrollArea className="max-h-[calc(90vh-240px)]">
@@ -318,7 +341,7 @@ export function Projects() {
                     <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
                       Funcionalidades
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1">
                       {selectedProject.features.map((feature, i) => (
                         <li
                           key={i}

@@ -10,8 +10,8 @@ const contactItems = [
   {
     icon: Phone,
     label: "Telefone",
-    value: "+55 (34) 99691-5092",
-    href: "tel:+5534996915092",
+    value: "+55 (34) 99709-4995",
+    href: "tel:+5534997094995",
   },
   {
     icon: Linkedin,

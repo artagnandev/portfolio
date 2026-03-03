@@ -32,14 +32,14 @@ export function Header() {
       }`}
       role="banner"
     >
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-5xl items-center justify-between py-4">
         <a
           href="#"
           className="text-lg font-bold tracking-tight text-foreground transition-colors hover:text-primary"
           aria-label="Voltar ao topo"
         >
-          {"DA"}
-          <span className="text-primary">{"."}</span>
+          DA
+          <span className="text-primary">.</span>
         </a>
 
         <nav className="hidden md:block" aria-label="Navegacao principal">
