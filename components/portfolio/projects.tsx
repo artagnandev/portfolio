@@ -65,6 +65,62 @@ const projects: Project[] = [
       "Interface intuitiva para equipes de campo",
     ],
   },
+  {
+    title: "Ultragaz",
+    shortDescription:
+      "Plataforma de gestão de pedidos para clientes e fornecedores de gás, centralizando todo o ciclo de compras.",
+    fullDescription: [
+      "A Ultragaz é uma plataforma completa de gestão de pedidos desenvolvida para otimizar a relação entre clientes e fornecedores no segmento de distribuição de gás. O sistema centraliza todo o ciclo de compras — desde a solicitação até a entrega — proporcionando visibilidade total sobre cada etapa do processo.",
+      "Com foco em eficiência operacional, a plataforma oferece painéis de controle intuitivos, histórico detalhado de transações e ferramentas de acompanhamento em tempo real, permitindo que gestores e equipes de campo tomem decisões mais ágeis e baseadas em dados.",
+    ],
+    images: [
+      "/project-images/ultragaz-1.png",
+      "/project-images/ultragaz-2.png",
+      "/project-images/ultragaz-3.png",
+      "/project-images/ultragaz-4.png",
+      "/project-images/ultragaz-5.png",
+    ],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "TanStack Table"],
+    features: [
+      "Gestão completa do ciclo de pedidos de ponta a ponta",
+      "Tabelas avançadas com filtros, ordenação e paginação via TanStack Table",
+      "Painéis de controle com métricas de vendas e desempenho",
+      "Histórico detalhado de transações e pedidos",
+      "Gestão de clientes e fornecedores em uma única plataforma",
+      "Acompanhamento de status de entrega em tempo real",
+      "Interface responsiva e acessível para diferentes dispositivos",
+    ],
+  },
+  {
+    title: "ClassificAgro",
+    shortDescription:
+      "Plataforma de vagas do agronegócio que conecta candidatos qualificados a empresas do setor rural.",
+    fullDescription: [
+      "O ClassificAgro é uma plataforma especializada em recrutamento e seleção para o agronegócio, conectando profissionais qualificados a empresas do setor rural de forma ágil e direcionada. A plataforma atende tanto candidatos em busca de oportunidades quanto empresas que precisam encontrar talentos com experiência no campo.",
+      "Para candidatos, o sistema oferece busca inteligente de vagas, criação de perfil profissional e candidatura simplificada. Para empresas, disponibiliza ferramentas completas de publicação de vagas, triagem de currículos e gestão de processos seletivos — tudo pensado para as particularidades do mercado agro.",
+    ],
+    images: [
+      "/project-images/classificagro-1.png",
+      "/project-images/classificagro-2.png",
+      "/project-images/classificagro-3.png",
+      "/project-images/classificagro-4.png",
+      "/project-images/classificagro-5.png",
+      "/project-images/classificagro-6.png",
+      "/project-images/classificagro-7.png",
+      "/project-images/classificagro-8.png",
+    ],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    features: [
+      "Busca e filtros avançados de vagas por região, área e nível de experiência",
+      "Criação de perfil profissional e upload de currículo",
+      "Painel para empresas com publicação e gestão de vagas",
+      "Triagem e acompanhamento de candidaturas",
+      "Cadastro dual: fluxos dedicados para candidatos e empresas",
+      "Notificações de novas vagas compatíveis com o perfil",
+      "Interface responsiva otimizada para acesso mobile",
+    ],
+    liveUrl: "https://classificagro.com.br/",
+  },
 ];
 
 export function Projects() {
@@ -236,10 +292,10 @@ export function Projects() {
         open={!!selectedProject}
         onOpenChange={(open) => !open && setSelectedProject(null)}
       >
-        <DialogContent className="sm:max-w-2xl max-h-[90vh] p-0 gap-0 overflow-hidden">
+        <DialogContent className="sm:max-w-2xl max-h-[90vh] p-0 gap-0 overflow-hidden flex flex-col">
           {selectedProject && (
             <>
-              <div className="relative w-full bg-secondary">
+              <div className="relative w-full shrink-0 bg-secondary">
                 <Carousel
                   opts={{ align: "start", loop: true }}
                   setApi={onDialogApiChange}
@@ -296,95 +352,93 @@ export function Projects() {
                 </Carousel>
               </div>
 
-              <ScrollArea className="max-h-[calc(90vh-240px)]">
-                <div className="p-6 space-y-6">
-                  <DialogHeader>
-                    <DialogTitle className="text-xl font-bold text-foreground">
-                      {selectedProject.title}
-                    </DialogTitle>
-                    <DialogDescription className="sr-only">
-                      Detalhes do projeto {selectedProject.title}
-                    </DialogDescription>
-                  </DialogHeader>
+              <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                <DialogHeader>
+                  <DialogTitle className="text-xl font-bold text-foreground">
+                    {selectedProject.title}
+                  </DialogTitle>
+                  <DialogDescription className="sr-only">
+                    Detalhes do projeto {selectedProject.title}
+                  </DialogDescription>
+                </DialogHeader>
 
-                  <div
-                    className="flex flex-wrap gap-2"
-                    aria-label="Tecnologias utilizadas"
-                  >
-                    {selectedProject.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground"
+                <div
+                  className="flex flex-wrap gap-2"
+                  aria-label="Tecnologias utilizadas"
+                >
+                  {selectedProject.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                    Sobre o projeto
+                  </h4>
+                  <div className="space-y-2">
+                    {selectedProject.fullDescription.map((desc, i) => (
+                      <p
+                        key={i}
+                        className="text-sm leading-relaxed text-muted-foreground"
                       >
-                        {tag}
-                      </span>
+                        {desc}
+                      </p>
                     ))}
                   </div>
-
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
-                      Sobre o projeto
-                    </h4>
-                    <div className="space-y-2">
-                      {selectedProject.fullDescription.map((desc, i) => (
-                        <p
-                          key={i}
-                          className="text-sm leading-relaxed text-muted-foreground"
-                        >
-                          {desc}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
-                      Funcionalidades
-                    </h4>
-                    <ul className="space-y-1">
-                      {selectedProject.features.map((feature, i) => (
-                        <li
-                          key={i}
-                          className="flex gap-2 text-sm leading-relaxed text-muted-foreground"
-                        >
-                          <span
-                            className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60"
-                            aria-hidden="true"
-                          />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {(selectedProject.liveUrl || selectedProject.repoUrl) && (
-                    <div className="flex flex-wrap gap-3 border-t border-border pt-4">
-                      {selectedProject.liveUrl && (
-                        <a
-                          href={selectedProject.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
-                        >
-                          <ExternalLink size={14} />
-                          Ver projeto
-                        </a>
-                      )}
-                      {selectedProject.repoUrl && (
-                        <a
-                          href={selectedProject.repoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary/50 px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/50 hover:text-primary"
-                        >
-                          <Github size={14} />
-                          Código fonte
-                        </a>
-                      )}
-                    </div>
-                  )}
                 </div>
-              </ScrollArea>
+
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                    Funcionalidades
+                  </h4>
+                  <ul className="space-y-1">
+                    {selectedProject.features.map((feature, i) => (
+                      <li
+                        key={i}
+                        className="flex gap-2 text-sm leading-relaxed text-muted-foreground"
+                      >
+                        <span
+                          className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60"
+                          aria-hidden="true"
+                        />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {(selectedProject.liveUrl || selectedProject.repoUrl) && (
+                  <div className="flex flex-wrap gap-3 border-t border-border pt-4">
+                    {selectedProject.liveUrl && (
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
+                      >
+                        <ExternalLink size={14} />
+                        Ver projeto
+                      </a>
+                    )}
+                    {selectedProject.repoUrl && (
+                      <a
+                        href={selectedProject.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary/50 px-4 py-2.5 text-sm font-semibold text-foreground transition-all hover:border-primary/50 hover:text-primary"
+                      >
+                        <Github size={14} />
+                        Código fonte
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
             </>
           )}
         </DialogContent>
