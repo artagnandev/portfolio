@@ -27,6 +27,7 @@ type Project = {
   features: string[];
   liveUrl?: string;
   repoUrl?: string;
+  contributions: string[];
 };
 
 const projects: Project[] = [
@@ -64,6 +65,13 @@ const projects: Project[] = [
       "Insights para decisões de gerenciamento de obra",
       "Interface intuitiva para equipes de campo",
     ],
+    contributions: [
+      "Integração com API Rest",
+      "Sistema de autenticação com JWT",
+      "Desenvolvimento de componentes e telas (Figma to code)",
+      "Desenvolvimento de hooks personalizados e funções utilitárias",
+      "Reuniões com stakeholders para entender as necessidades e feedbacks",
+    ],
   },
   {
     title: "Ultragaz",
@@ -89,6 +97,14 @@ const projects: Project[] = [
       "Gestão de clientes e fornecedores em uma única plataforma",
       "Acompanhamento de status de entrega em tempo real",
       "Interface responsiva e acessível para diferentes dispositivos",
+    ],
+    contributions: [
+      "Integração com API Rest",
+      "Sistema de autenticação com JWT",
+      "Desenvolvimento de componentes e telas (Figma to code)",
+      "Desenvolvimento de hooks personalizados e funções utilitárias",
+      "Reuniões com stakeholders para entender as necessidades e feedbacks",
+      "Deploy da aplicação em produção",
     ],
   },
   {
@@ -120,6 +136,14 @@ const projects: Project[] = [
       "Interface responsiva otimizada para acesso mobile",
     ],
     liveUrl: "https://classificagro.com.br/",
+    contributions: [
+      "Integração com API Rest",
+      "Sistema de autenticação com JWT",
+      "Desenvolvimento de componentes e telas (Figma to code)",
+      "Desenvolvimento dos sites públicos (candidatos e empresas)",
+      "Desenvolvimento de hooks personalizados e funções utilitárias",
+      "Reuniões com stakeholders para entender as necessidades e feedbacks",
+    ],
   },
 ];
 
@@ -168,7 +192,7 @@ export function Projects() {
         className="scroll-mt-24 px-6 py-24 relative"
         aria-labelledby="projetos-titulo"
       >
-        <div className="mx-auto max-w-5xl">
+        <div className="relative z-10 mx-auto max-w-5xl">
           <div className="mb-4 flex items-center gap-3">
             <div
               className="h-px flex-1 max-w-12 bg-primary"
@@ -232,7 +256,6 @@ export function Projects() {
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-linear-to-t from-card/80 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                     </div>
 
                     <div className="flex flex-1 flex-col p-5">
@@ -272,7 +295,7 @@ export function Projects() {
 
         {/* Subtle grid background */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
           aria-hidden="true"
           style={{
             backgroundImage:
@@ -412,6 +435,26 @@ export function Projects() {
                   </ul>
                 </div>
 
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                    Contribuições
+                  </h4>
+                  <ul className="space-y-1">
+                    {selectedProject.contributions.map((contribution, i) => (
+                      <li
+                        key={i}
+                        className="flex gap-2 text-sm leading-relaxed text-muted-foreground"
+                      >
+                        <span
+                          className="mt-2 h-1 w-1 min-w-1 shrink-0 rounded-full bg-primary/60"
+                          aria-hidden="true"
+                        />
+                        {contribution}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 {(selectedProject.liveUrl || selectedProject.repoUrl) && (
                   <div className="flex flex-wrap gap-3 border-t border-border pt-4">
                     {selectedProject.liveUrl && (
@@ -422,7 +465,7 @@ export function Projects() {
                         className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
                       >
                         <ExternalLink size={14} />
-                        Ver projeto
+                        Ver em produção
                       </a>
                     )}
                     {selectedProject.repoUrl && (
