@@ -1,12 +1,12 @@
-import { Header } from "@/components/portfolio/header";
-import { Hero } from "@/components/portfolio/hero";
-import { About } from "@/components/portfolio/about";
-import { Experience } from "@/components/portfolio/experience";
-import { Skills } from "@/components/portfolio/skills";
-import { Projects } from "@/components/portfolio/projects";
-import { Education } from "@/components/portfolio/education";
-import { Contact } from "@/components/portfolio/contact";
-import { Footer } from "@/components/portfolio/footer";
+import { Header } from "@/layouts/portfolio/header";
+import { Hero } from "@/layouts/portfolio/hero";
+import { About } from "@/layouts/portfolio/about";
+import { Experience } from "@/layouts/portfolio/experience";
+import { Skills } from "@/layouts/portfolio/skills";
+import { Projects } from "@/layouts/portfolio/projects";
+import { Education } from "@/layouts/portfolio/education";
+import { Contact } from "@/layouts/portfolio/contact";
+import { Footer } from "@/layouts/portfolio/footer";
 
 export default function Page() {
   return (
