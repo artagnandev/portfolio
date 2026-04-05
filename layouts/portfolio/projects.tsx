@@ -126,7 +126,7 @@ export function Projects() {
                   <div className="pointer-events-none absolute -left-10 top-1/2 h-44 w-44 -translate-y-1/2 rounded-full bg-primary/20 blur-3xl" />
                   <div className="pointer-events-none absolute -right-8 bottom-0 h-36 w-36 rounded-full bg-primary/15 blur-2xl" />
 
-                  <div className="relative z-10 flex flex-col items-center gap-3">
+                  <div className="relative z-10 flex flex-col items-center gap-3 py-12">
                     <div className="flex items-center">
                       <span className="text-5xl font-extrabold leading-none tracking-tighter text-primary tabular-nums sm:text-6xl">
                         +50
@@ -166,7 +166,7 @@ export function Projects() {
         onOpenChange={(open) => !open && setSelectedProject(null)}
       >
         <DialogContent
-          className="sm:max-w-2xl max-h-[90vh] p-0 gap-0 overflow-hidden flex flex-col"
+          className="fixed inset-0 z-50 flex h-dvh w-full max-w-none translate-x-0 translate-y-0 flex-col gap-0 overflow-hidden rounded-none border-0 p-0 shadow-none sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[90vh] sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-lg sm:border sm:shadow-lg"
           closeButtonClassName="rounded-full bg-black/55 p-2 text-white opacity-100 shadow-md ring-black/20 backdrop-blur-sm transition-colors hover:bg-black/75 hover:text-white data-[state=open]:bg-black/55 data-[state=open]:text-white focus:ring-white/40 [&_svg]:size-5"
         >
           {selectedProject && (
@@ -230,7 +230,7 @@ export function Projects() {
 
               <div className="flex-1 overflow-y-auto p-6 space-y-6">
                 <DialogHeader>
-                  <DialogTitle className="text-xl font-bold text-foreground">
+                  <DialogTitle className="text-xl text-left font-bold text-foreground">
                     {selectedProject.title}
                   </DialogTitle>
                   <DialogDescription className="sr-only">
