@@ -1,18 +1,19 @@
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-import { FlatCompat } from "@eslint/eslintrc";
+import next from "eslint-config-next";
+import tseslint from "typescript-eslint";
 
-const compat = new FlatCompat({
-  baseDirectory: dirname(fileURLToPath(import.meta.url)),
-});
-
-export default [
+// eslint-config-next 16 já exporta flat config nativo — sem FlatCompat.
+const config = [
   { ignores: [".next/**", "node_modules/**", "next-env.d.ts"] },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...next,
   {
+    // O plugin precisa ser declarado no mesmo objeto de config que usa suas regras.
+    files: ["**/*.ts", "**/*.tsx"],
+    plugins: { "@typescript-eslint": tseslint.plugin },
     rules: {
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/consistent-type-imports": "error",
     },
   },
 ];
+
+export default config;

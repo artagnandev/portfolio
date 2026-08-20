@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -22,33 +22,40 @@ const anchors: Record<(typeof sections)[number], string> = {
 export const Header = ({ locale }: { locale: Locale }) => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const sentinel = useRef<HTMLDivElement>(null);
   const { resolvedTheme, setTheme } = useTheme();
   const pathname = usePathname();
 
-  useEffect(() => setMounted(true), []);
-
+  // Sentinela + IntersectionObserver em vez de listener de scroll: o callback
+  // é assíncrono (sem setState síncrono no effect) e não roda a cada pixel.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const target = sentinel.current;
+    if (!target) return;
 
-  // Fecha o menu ao navegar.
-  useEffect(() => setOpen(false), [pathname]);
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry?.isIntersecting),
+      { rootMargin: "-24px 0px 0px 0px" },
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   const target = otherLocale(locale);
   const swapPath = pathname.replace(`/${locale}`, `/${target}`);
 
   return (
-    <header
-      data-site-header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled ? "border-b border-rule bg-paper/85 backdrop-blur-md" : "bg-transparent",
-      )}
-    >
+    <>
+      {/* Alvo do IntersectionObserver: sai do viewport assim que a página rola. */}
+      <div ref={sentinel} aria-hidden="true" className="absolute top-0 h-px w-full" />
+
+      <header
+        data-site-header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+          scrolled ? "border-b border-rule bg-paper/85 backdrop-blur-md" : "bg-transparent",
+        )}
+      >
       <div className="shell flex items-center justify-between py-5">
         <Link
           href={`/${locale}`}
@@ -92,8 +99,10 @@ export const Header = ({ locale }: { locale: Locale }) => {
             className="p-2 text-ink-muted transition-colors hover:text-accent"
             aria-label={t(dictionary.actions.toggleTheme, locale)}
           >
-            {/* Só renderiza o ícone após montar: evita mismatch de hidratação. */}
-            {mounted && resolvedTheme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+            {/* Ambos os ícones são renderizados; o CSS decide qual aparece.
+                Evita o estado `mounted` e qualquer mismatch de hidratação. */}
+            <Moon size={17} className="dark:hidden" aria-hidden="true" />
+            <Sun size={17} className="hidden dark:block" aria-hidden="true" />
           </button>
 
           <button
@@ -129,14 +138,16 @@ export const Header = ({ locale }: { locale: Locale }) => {
             <li>
               <Link
                 href={`/${locale}/curriculo`}
+                onClick={() => setOpen(false)}
                 className="block py-4 font-display text-step-1 text-accent"
               >
                 {t(dictionary.nav.resume, locale)}
               </Link>
             </li>
           </ul>
-        </nav>
-      )}
-    </header>
+          </nav>
+        )}
+      </header>
+    </>
   );
 };
