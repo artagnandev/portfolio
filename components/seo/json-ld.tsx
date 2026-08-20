@@ -1,5 +1,5 @@
 import { projects } from "@/content/projects";
-import { profile } from "@/content/profile";
+import { agency, profile } from "@/content/profile";
 import { experiences, keywords } from "@/content/resume";
 import { dictionary } from "@/content/dictionary";
 import { t, type Locale } from "@/lib/i18n";
@@ -7,6 +7,7 @@ import { absoluteUrl, siteUrl } from "@/lib/site";
 
 export const JsonLd = ({ locale }: { locale: Locale }) => {
   const personId = `${siteUrl}/#person`;
+  const agencyId = `${siteUrl}/#agency`;
   const current = experiences.find((exp) => exp.end === null);
 
   const graph = {
@@ -29,13 +30,23 @@ export const JsonLd = ({ locale }: { locale: Locale }) => {
           addressRegion: "MG",
           addressCountry: "BR",
         },
-        worksFor: current ? { "@type": "Organization", name: current.company } : undefined,
+        worksFor: current
+          ? current.company === agency.name
+            ? { "@id": agencyId }
+            : { "@type": "Organization", name: current.company }
+          : undefined,
         alumniOf: [
           { "@type": "EducationalOrganization", name: "Centro Universitário UNA" },
           { "@type": "EducationalOrganization", name: "Rocketseat" },
         ],
         knowsAbout: keywords.slice(0, 24),
         sameAs: [profile.linkedin, profile.github],
+      },
+      {
+        "@type": "Organization",
+        "@id": agencyId,
+        name: agency.name,
+        url: agency.url,
       },
       {
         "@type": "ProfilePage",
@@ -70,7 +81,10 @@ export const JsonLd = ({ locale }: { locale: Locale }) => {
             keywords: project.stack.join(", "),
             image: absoluteUrl(project.images[0]?.src ?? profile.photo),
             creator: { "@id": personId },
-            ...(project.liveUrl ? { url: project.liveUrl } : {}),
+            // Cliente de quem o autor era prestador: o crédito da agência.
+            sourceOrganization: { "@id": agencyId },
+            url: absoluteUrl(`${locale}/projetos/${project.slug}`),
+            ...(project.liveUrl ? { sameAs: project.liveUrl } : {}),
           },
         })),
       },

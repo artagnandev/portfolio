@@ -33,11 +33,6 @@ export const projects: Project[] = [
         "The core challenge was keeping a single source of truth across two platforms with unreliable connectivity on site.",
       ],
     },
-    metrics: [
-      { value: "10", label: { pt: "funcionalidades", en: "features" } },
-      { value: "06", label: { pt: "fluxos do Figma", en: "Figma flows" } },
-      { value: "02", label: { pt: "plataformas", en: "platforms" } },
-    ],
     stack: ["React", "React Native", "TypeScript", "Material UI", "Tailwind CSS"],
     features: {
       pt: [
@@ -96,10 +91,6 @@ export const projects: Project[] = [
         "Order volume demanded tables able to filter, sort and paginate thousands of rows without stalling the browser.",
       ],
     },
-    metrics: [
-      { value: "07", label: { pt: "módulos funcionais", en: "functional modules" } },
-      { value: "01", label: { pt: "deploy em produção", en: "production deploy" } },
-    ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "TanStack Table"],
     features: {
       pt: [
@@ -154,11 +145,6 @@ export const projects: Project[] = [
         "Usage is predominantly mobile, which drove the mobile-first strategy across the whole interface.",
       ],
     },
-    metrics: [
-      { value: "08", label: { pt: "telas entregues", en: "screens delivered" } },
-      { value: "07", label: { pt: "funcionalidades", en: "features" } },
-      { value: "02", label: { pt: "sites públicos", en: "public sites" } },
-    ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS"],
     features: {
       pt: [
@@ -214,10 +200,6 @@ export const projects: Project[] = [
         "The financial business rules demanded precision in the data layer and tables able to drill down per material.",
       ],
     },
-    metrics: [
-      { value: "06", label: { pt: "funcionalidades", en: "features" } },
-      { value: "06", label: { pt: "telas", en: "screens" } },
-    ],
     stack: ["Next.js", "TypeScript", "TanStack Table", "Shadcn UI", "Tailwind CSS"],
     features: {
       pt: [
@@ -254,7 +236,7 @@ export const projects: Project[] = [
   {
     slug: "instituto-algar",
     title: "Instituto Algar",
-    segment: { pt: "Terceiro setor", en: "Non-profit" },
+    segment: { pt: "Impacto social", en: "Social impact" },
     period: "2023",
     summary: {
       pt: "Site institucional de programa social, com foco em clareza de mensagem, acessibilidade e autonomia editorial.",
@@ -270,9 +252,6 @@ export const projects: Project[] = [
         "Pairing WordPress with a custom theme solved both sides: editorial autonomy without giving up control of semantics and performance.",
       ],
     },
-    metrics: [
-      { value: "06", label: { pt: "seções institucionais", en: "institutional sections" } },
-    ],
     stack: ["WordPress", "HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
     features: {
       pt: [

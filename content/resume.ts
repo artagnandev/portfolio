@@ -9,18 +9,22 @@ export const experiences: Experience[] = [
     location: { pt: "Uberlândia, MG", en: "Uberlândia, Brazil" },
     bullets: {
       pt: [
-        "Lidero a estratégia de front-end da empresa, guiando a equipe na entrega de sistemas web e mobile para clientes de quatro segmentos: construção civil, distribuição de energia, agronegócio e terceiro setor.",
+        "Lidero a estratégia de front-end da empresa, guiando a equipe na entrega de sistemas web e mobile para clientes de quatro segmentos: construção civil, distribuição de energia, agronegócio e impacto social.",
         "Defini arquiteturas escaláveis em React, Next.js e TypeScript, padronizando a camada de componentes e reduzindo retrabalho entre projetos com bibliotecas internas de hooks e utilitários.",
         "Conduzo reuniões de levantamento de requisitos e validação de entrega com stakeholders, mantendo o roadmap técnico alinhado aos objetivos de negócio.",
         "Estabeleci acessibilidade (ARIA, HTML semântico, navegação por teclado) e responsividade mobile-first como critério de aceite em 100% das interfaces entregues.",
         "Atuo em code review e mentoria técnica, disseminando Clean Code e TypeScript estrito no time.",
+        "Incorporei agentes de IA ao fluxo de desenvolvimento do time sob guard-rails explícitos — contexto e convenções versionados no repositório, revisão humana obrigatória e checagem automatizada de tipos, lint e testes antes de qualquer merge.",
+        "Uso IA para encurtar as etapas repetitivas da entrega (scaffolding, refatoração, cobertura de testes e documentação) sem abrir mão dos critérios de qualidade, mantendo o time em contato com as práticas correntes do mercado.",
       ],
       en: [
-        "I lead the company's front-end strategy, guiding the team in delivering web and mobile systems for clients across four industries: construction, energy distribution, agribusiness and the non-profit sector.",
+        "I lead the company's front-end strategy, guiding the team in delivering web and mobile systems for clients across four industries: construction, energy distribution, agribusiness and social impact.",
         "Defined scalable architectures in React, Next.js and TypeScript, standardising the component layer and cutting cross-project rework through internal hook and utility libraries.",
         "I run requirements-gathering and delivery-validation sessions with stakeholders, keeping the technical roadmap aligned with business goals.",
         "Established accessibility (ARIA, semantic HTML, keyboard navigation) and mobile-first responsiveness as acceptance criteria on 100% of delivered interfaces.",
         "I run code reviews and technical mentoring, spreading Clean Code and strict TypeScript across the team.",
+        "Brought AI agents into the team's development workflow behind explicit guard-rails — context and conventions versioned in the repository, mandatory human review, and automated type, lint and test checks before any merge.",
+        "I use AI to shorten the repetitive parts of delivery (scaffolding, refactoring, test coverage and documentation) without loosening quality criteria, keeping the team in touch with current market practice.",
       ],
     },
     stack: [
@@ -33,6 +37,7 @@ export const experiences: Experience[] = [
       "TanStack Table",
       "REST",
       "JWT",
+      "AI Agents",
     ],
   },
   {
@@ -90,44 +95,6 @@ export const experiences: Experience[] = [
     },
     stack: ["JavaScript", "React", "HTML5", "CSS3"],
   },
-  {
-    company: "UNITRI — Centro Universitário do Triângulo",
-    role: {
-      pt: "Desenvolvedor Web Front-end (Jovem Aprendiz)",
-      en: "Front-end Web Developer (Apprentice)",
-    },
-    start: "2020-02",
-    end: "2020-05",
-    location: { pt: "Uberlândia, MG", en: "Uberlândia, Brazil" },
-    bullets: {
-      pt: [
-        "Início da carreira em desenvolvimento web, atuando na manutenção e implementação de interfaces com HTML, CSS e JavaScript.",
-      ],
-      en: [
-        "Start of my web development career, maintaining and implementing interfaces with HTML, CSS and JavaScript.",
-      ],
-    },
-    stack: ["HTML5", "CSS3", "JavaScript"],
-  },
-  {
-    company: "UNITRI — Centro Universitário do Triângulo",
-    role: {
-      pt: "Auxiliar Administrativo (Jovem Aprendiz)",
-      en: "Administrative Assistant (Apprentice)",
-    },
-    start: "2018-12",
-    end: "2020-02",
-    location: { pt: "Uberlândia, MG", en: "Uberlândia, Brazil" },
-    bullets: {
-      pt: [
-        "Rotinas administrativas, desenvolvendo organização, gestão de prazos e comunicação profissional.",
-      ],
-      en: [
-        "Administrative routines, developing organisation, deadline management and professional communication.",
-      ],
-    },
-    stack: [],
-  },
 ];
 
 export const skillGroups: SkillGroup[] = [
@@ -168,6 +135,8 @@ export const skillGroups: SkillGroup[] = [
       "Acessibilidade (ARIA, WCAG)",
       "Web performance",
       "SEO On-Page",
+      "Desenvolvimento assistido por IA",
+      "Guard-rails para agentes",
     ],
   },
   {
@@ -220,10 +189,7 @@ export const languages: { name: LocalizedText; level: LocalizedText }[] = [
   },
   {
     name: { pt: "Inglês", en: "English" },
-    level: {
-      pt: "Leitura técnica de documentação e código",
-      en: "Technical reading of documentation and code",
-    },
+    level: { pt: "Intermediário", en: "Intermediate" },
   },
 ];
 
@@ -273,6 +239,11 @@ export const keywords: string[] = [
   "Chrome DevTools",
   "Vercel",
   "Node.js",
+  "Desenvolvimento assistido por IA",
+  "AI-assisted Development",
+  "Agentes de IA",
+  "AI Agents",
+  "Guard-rails",
   "Front-end Lead",
   "Liderança Técnica",
   "Desenvolvimento Web",

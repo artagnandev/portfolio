@@ -45,11 +45,6 @@ export type ProjectImage = {
   alt: LocalizedText;
 };
 
-export type ProjectMetric = {
-  value: string;
-  label: LocalizedText;
-};
-
 export type Project = {
   slug: string;
   /** Nome próprio do produto — nunca traduzido. */
@@ -58,7 +53,6 @@ export type Project = {
   period: string;
   summary: LocalizedText;
   description: LocalizedList;
-  metrics: ProjectMetric[];
   stack: string[];
   features: LocalizedList;
   contributions: LocalizedList;

@@ -24,11 +24,20 @@ export const profile = {
   } satisfies LocalizedText,
   email: "davidrezendeartagnan619@gmail.com",
   /** Fonte única. E.164 para href, formatado para exibição. */
-  phone: "+5534996915092",
-  phoneDisplay: "+55 (34) 99691-5092",
+  phone: "+5534997094995",
+  phoneDisplay: "+55 (34) 99709-4995",
   linkedin: "https://www.linkedin.com/in/david-artagnan",
   github: "https://github.com/artagnandev",
-  photo: "/david-artagnan.jpg",
+  photo: "/david-artagnan.png",
+} as const;
+
+/**
+ * Agência por trás de todos os projetos do portfólio. Fonte única do crédito —
+ * exibido na seção de projetos e em cada página de detalhe.
+ */
+export const agency = {
+  name: "Flow Lab Tech",
+  url: "https://www.flowlabtech.com.br/",
 } as const;
 
 export const stats: Stat[] = [

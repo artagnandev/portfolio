@@ -30,24 +30,30 @@ Nenhum texto vive em JSX. Tudo está em `content/`:
 |---|---|
 | `content/profile.ts` | Nome, cargo, contato, estatísticas do hero |
 | `content/resume.ts` | Experiências, competências, formação, certificações, palavras-chave |
-| `content/projects.ts` | Projetos, imagens, métricas, contribuições |
+| `content/projects.ts` | Projetos, imagens, funcionalidades, contribuições |
 | `content/dictionary.ts` | Strings de interface (nav, botões, títulos de seção) |
 
 **Toda entrada precisa de `pt` e `en`.** `bun run test` falha apontando o caminho exato da string faltante (ex.: `nav.work → en`).
 
 ## Adicionar um projeto
 
-1. Colocar as imagens em `public/project-images/<slug>-1.png`, `-2.png`, …
+1. Colocar as imagens em `public/project-images/<slug>-1.png`, `-2.png`, … — a primeira é a capa
 2. Acrescentar a entrada em `content/projects.ts` usando o helper `shots(slug, quantidade, nome)`
 3. `bun run test` — valida slug único, existência de cada arquivo de imagem em disco e paridade de idioma
 
+A página de detalhe (`/pt/projetos/<slug>`), o sitemap e o JSON-LD saem daí sozinhos.
+
+## Páginas de projeto
+
+Cada projeto tem página própria em `/{locale}/projetos/{slug}`, pré-renderizada no build. Ao clicar no card da home, a capa **morfa** de miniatura para o hero da página via [View Transitions](https://nextjs.org/docs/app/guides/view-transitions) — sem biblioteca de animação: o par é declarado com `<ViewTransition name>` nos dois lados e o navegador interpola.
+
+Sem suporte a View Transitions (Safari e Firefox antigos), a navegação acontece normalmente, só sem a animação.
+
 ## A foto do hero
 
-O hero espera `public/david-artagnan.jpg` (quadrado, ≥ 800×800). O arquivo **não** está no repositório.
+O hero espera `public/david-artagnan.png` (quadrado, ≥ 800×800).
 
-Enquanto ele não existir, o hero mostra um bloco tipográfico com as iniciais — a build não quebra e nenhuma requisição 404 é feita. A checagem acontece em tempo de build, em `lib/assets.ts`.
-
-Basta salvar o arquivo e rodar `bun run build`.
+Se o arquivo não existir, o hero mostra um bloco tipográfico com as iniciais — a build não quebra e nenhuma requisição 404 é feita. A checagem acontece em tempo de build, em `lib/assets.ts`.
 
 ## Idiomas
 

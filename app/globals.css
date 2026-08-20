@@ -163,10 +163,6 @@
   .rise-2 { animation: rise var(--dur-slow) var(--ease-expo) 160ms both; }
   .rise-3 { animation: rise var(--dur-slow) var(--ease-expo) 240ms both; }
   .rise-4 { animation: rise var(--dur-slow) var(--ease-expo) 320ms both; }
-
-  /* Entrada e saída do diálogo — substitui o tw-animate-css removido. */
-  .animate-dialog-in { animation: dialog-in var(--dur) var(--ease-expo) both; }
-  .animate-dialog-out { animation: dialog-out var(--dur-fast) var(--ease-editorial) both; }
 }
 
 @keyframes rise {
@@ -174,14 +170,31 @@
   to { opacity: 1; transform: none; }
 }
 
-@keyframes dialog-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+/*
+ * View Transitions — a capa do projeto morfa do card da home para o hero da
+ * página de detalhe. O par é declarado em React, com <ViewTransition name>;
+ * aqui fica só o tempo e o acabamento da animação.
+ */
 
-@keyframes dialog-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+/* O overlay da transição captura o ponteiro; devolve o clique à página viva. */
+::view-transition { pointer-events: none; }
+
+/* Header ancorado: o conteúdo troca, a barra fixa não se mexe nem pisca. */
+[data-site-header] { view-transition-name: site-header; }
+::view-transition-group(site-header) { animation: none; z-index: 100; }
+::view-transition-old(site-header) { display: none; }
+::view-transition-new(site-header) { animation: none; }
+
+/* Classe atribuída pelo `share="morph"` da capa. */
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-slow);
+  animation-timing-function: var(--ease-expo);
+}
+::view-transition-image-pair(.morph) { animation-name: morph-blur; }
+
+/* O blur esconde o artefato de interpolação entre as duas resoluções. */
+@keyframes morph-blur {
+  30% { filter: blur(3px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -190,5 +203,13 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* Os pseudo-elementos de view transition não são alcançados por `*`. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
   }
 }

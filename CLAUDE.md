@@ -6,7 +6,7 @@ Nenhuma string de interface em JSX. Todo texto vem de `content/` como `Record<Lo
 
 ## Convenções
 
-- Seções são Server Components. Levam `"use client"` apenas: `components/motion/*`, `layout/header.tsx`, `sections/projects.tsx`, `sections/project-dialog.tsx`, `resume/print-button.tsx`, `providers.tsx` e `hooks/use-reduced-motion.ts`.
+- Seções são Server Components. Levam `"use client"` apenas: `components/motion/*`, `layout/header.tsx`, `resume/print-button.tsx`, `providers.tsx` e `hooks/use-reduced-motion.ts`.
 - Uma seção tem exatamente um `<h2>`. O eyebrow é `<Rule label>`, que **não** é cabeçalho.
 - Cores só por token: `paper`, `paper-raised`, `ink`, `ink-muted`, `rule`, `accent`, `accent-soft`, `accent-contrast`. Nunca hex literal no JSX.
 - `text-ink-faint` não passa em contraste AA para texto pequeno — usar só em decoração ou texto ≥ 24px.
@@ -18,6 +18,19 @@ Nenhuma string de interface em JSX. Todo texto vem de `content/` como `Record<Lo
 **Nada acima da dobra pode depender da hidratação para ficar visível.**
 
 A dobra inicial anima com os utilitários CSS `.rise`, `.rise-1`…`.rise-4` (`app/globals.css`), que rodam no primeiro paint. O `<Reveal>` do Motion só entra abaixo da dobra — ele começa em `opacity: 0` e, se envolvesse o `<h1>`, o LCP saltaria de ~1s para ~4s em mobile.
+
+## View Transitions
+
+A capa do projeto morfa do card em `sections/projects.tsx` para o hero de `app/[locale]/projetos/[slug]/page.tsx`. O par é declarado nos dois lados com o **mesmo** `name`:
+
+```tsx
+<ViewTransition name={`project-${project.slug}`} share="morph" default="none">
+```
+
+- `ViewTransition` vem de `react`. Só existe em runtime no build canary que o Next empacota; os tipos entram por `types/react-canary.d.ts`.
+- `default="none"` evita que as outras capas animem em transições que não são delas — e, com ele, o `share` explícito é **obrigatório** (sem `share`, o par para de morfar em silêncio).
+- Elemento nomeado não leva `.rise`: uma animação de opacidade própria briga com o morph.
+- O acabamento (duração, blur, header ancorado, `prefers-reduced-motion`) fica em `app/globals.css`.
 
 ## Sem setState síncrono em effect
 
