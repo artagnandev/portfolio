@@ -151,6 +151,20 @@
   }
 
   .tilt-scene { perspective: 1100px; }
+
+  /* Entrada e saída do diálogo — substitui o tw-animate-css removido. */
+  .animate-dialog-in { animation: dialog-in var(--dur) var(--ease-expo) both; }
+  .animate-dialog-out { animation: dialog-out var(--dur-fast) var(--ease-editorial) both; }
+}
+
+@keyframes dialog-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialog-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
