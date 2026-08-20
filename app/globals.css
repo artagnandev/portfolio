@@ -94,10 +94,10 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* A serifada variável: opsz acompanha o tamanho, WONK ligado só em display. */
+  /* WONK ligado dá o itálico angular característico da Fraunces. */
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    font-variation-settings: 'SOFT' 20, 'WONK' 1;
+    font-variation-settings: 'WONK' 1;
     font-weight: 500;
     line-height: 1.06;
     letter-spacing: -0.022em;
@@ -152,9 +152,26 @@
 
   .tilt-scene { perspective: 1100px; }
 
+  /*
+   * Entrada da dobra inicial em CSS puro. Precisa ser CSS e não Motion:
+   * o Motion só revela após a hidratação, o que deixaria o <h1> — elemento
+   * de LCP — invisível esperando JavaScript. Aqui a animação começa no
+   * primeiro paint. Motion fica para o que está abaixo da dobra.
+   */
+  .rise { animation: rise var(--dur-slow) var(--ease-expo) both; }
+  .rise-1 { animation: rise var(--dur-slow) var(--ease-expo) 80ms both; }
+  .rise-2 { animation: rise var(--dur-slow) var(--ease-expo) 160ms both; }
+  .rise-3 { animation: rise var(--dur-slow) var(--ease-expo) 240ms both; }
+  .rise-4 { animation: rise var(--dur-slow) var(--ease-expo) 320ms both; }
+
   /* Entrada e saída do diálogo — substitui o tw-animate-css removido. */
   .animate-dialog-in { animation: dialog-in var(--dur) var(--ease-expo) both; }
   .animate-dialog-out { animation: dialog-out var(--dur-fast) var(--ease-editorial) both; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes dialog-in {

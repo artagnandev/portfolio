@@ -2,12 +2,16 @@ import Image from "next/image";
 import { ArrowRight, FileText } from "lucide-react";
 import { Action } from "@/components/primitives/action";
 import { CountUp } from "@/components/motion/count-up";
-import { Reveal } from "@/components/motion/reveal";
 import { dictionary } from "@/content/dictionary";
 import { profile, stats } from "@/content/profile";
 import { publicAssetExists } from "@/lib/assets";
 import { t, type Locale } from "@/lib/i18n";
 
+/**
+ * A dobra inicial anima por CSS (utilitários .rise-*), não por Motion.
+ * O <h1> é o elemento de LCP: se dependesse da hidratação para sair de
+ * opacity:0, o LCP saltaria de ~1s para ~4s em mobile.
+ */
 export const Hero = ({ locale }: { locale: Locale }) => {
   const hasPortrait = publicAssetExists(profile.photo);
 
@@ -21,70 +25,60 @@ export const Hero = ({ locale }: { locale: Locale }) => {
 
       <div className="shell relative grid gap-14 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">
-          <Reveal>
-            <p className="eyebrow mb-7">
-              {t(profile.role, locale)} · {t(profile.availability, locale)}
-            </p>
-          </Reveal>
+          <p className="eyebrow rise mb-7">
+            {t(profile.role, locale)} · {t(profile.availability, locale)}
+          </p>
 
-          <Reveal delay={0.08}>
-            <h1 id="hero-title" className="text-step-6 sm:text-step-7">
-              {profile.name}
-            </h1>
-          </Reveal>
+          <h1 id="hero-title" className="rise-1 text-step-6 sm:text-step-7">
+            {profile.name}
+          </h1>
 
-          <Reveal delay={0.16}>
-            <p className="measure mt-7 text-step-1 text-ink-muted">
-              {t(profile.headline, locale)}
-            </p>
-          </Reveal>
+          <p className="measure rise-2 mt-7 text-step-1 text-ink-muted">
+            {t(profile.headline, locale)}
+          </p>
 
-          <Reveal delay={0.24}>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Action href="#contact">
-                {t(dictionary.actions.getInTouch, locale)}
-                <ArrowRight
-                  size={15}
-                  className="transition-transform duration-200 group-hover:translate-x-1"
-                />
-              </Action>
-              <Action href={`/${locale}/curriculo`} variant="outline">
-                <FileText size={15} />
-                {t(dictionary.actions.viewResume, locale)}
-              </Action>
-            </div>
-          </Reveal>
+          <div className="rise-3 mt-10 flex flex-wrap gap-3">
+            <Action href="#contact">
+              {t(dictionary.actions.getInTouch, locale)}
+              <ArrowRight
+                size={15}
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
+            </Action>
+            <Action href={`/${locale}/curriculo`} variant="outline">
+              <FileText size={15} />
+              {t(dictionary.actions.viewResume, locale)}
+            </Action>
+          </div>
         </div>
 
-        <Reveal delay={0.2} className="lg:col-span-5">
-          <figure className="relative">
-            <div className="relative aspect-square w-full max-w-sm overflow-hidden border border-rule lg:ml-auto">
-              {hasPortrait ? (
-                <Image
-                  src={profile.photo}
-                  alt={`${profile.name} — ${t(profile.role, locale)}`}
-                  fill
-                  sizes="(max-width: 1024px) 90vw, 24rem"
-                  className="object-cover grayscale-[0.35] transition-[filter] duration-700 hover:grayscale-0"
-                  priority
-                />
-              ) : (
-                // Fallback tipográfico enquanto o retrato não existe em public/.
-                <div
-                  className="flex h-full w-full items-center justify-center bg-paper-raised"
-                  aria-hidden="true"
-                >
-                  <span className="font-display text-step-7 leading-none text-ink">
-                    DA<span className="text-accent">.</span>
-                  </span>
-                </div>
-              )}
-            </div>
-            <figcaption className="eyebrow mt-4 lg:text-right">
-              {t(profile.location, locale)}
-            </figcaption>
-          </figure>
-        </Reveal>
+        <figure className="rise-2 relative lg:col-span-5">
+          <div className="relative aspect-square w-full max-w-sm overflow-hidden border border-rule lg:ml-auto">
+            {hasPortrait ? (
+              <Image
+                src={profile.photo}
+                alt={`${profile.name} — ${t(profile.role, locale)}`}
+                fill
+                sizes="(max-width: 1024px) 90vw, 24rem"
+                className="object-cover grayscale-[0.35] transition-[filter] duration-700 hover:grayscale-0"
+                priority
+              />
+            ) : (
+              // Fallback tipográfico enquanto o retrato não existe em public/.
+              <div
+                className="flex h-full w-full items-center justify-center bg-paper-raised"
+                aria-hidden="true"
+              >
+                <span className="font-display text-step-7 leading-none text-ink">
+                  DA<span className="text-accent">.</span>
+                </span>
+              </div>
+            )}
+          </div>
+          <figcaption className="eyebrow mt-4 lg:text-right">
+            {t(profile.location, locale)}
+          </figcaption>
+        </figure>
       </div>
 
       <div className="shell relative mt-20 border-t border-rule pt-10">

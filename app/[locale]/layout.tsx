@@ -13,11 +13,13 @@ import { profile } from "@/content/profile";
 import { htmlLang, isLocale, locales, t, type Locale } from "@/lib/i18n";
 import { absoluteUrl, alternatesFor, siteUrl } from "@/lib/site";
 
+// Só o eixo WONK — é ele que dá o caráter angular da Fraunces. SOFT e opsz
+// custavam dezenas de KB no arquivo variável para um ganho visual marginal.
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
   display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
+  axes: ["WONK"],
 });
 
 const instrument = Instrument_Sans({
@@ -26,11 +28,13 @@ const instrument = Instrument_Sans({
   display: "swap",
 });
 
+// Usada só em rótulos pequenos, nunca no LCP — fora do preload.
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
   display: "swap",
   weight: ["400", "500"],
+  preload: false,
 });
 
 export const generateStaticParams = () => locales.map((locale) => ({ locale }));
