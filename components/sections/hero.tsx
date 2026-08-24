@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight, FileText } from "lucide-react";
 import { Action } from "@/components/primitives/action";
 import { CountUp } from "@/components/motion/count-up";
+import { ParticleField } from "@/components/motion/particle-field";
 import { dictionary } from "@/content/dictionary";
 import { profile, stats } from "@/content/profile";
 import { publicAssetExists } from "@/lib/assets";
@@ -22,6 +23,10 @@ export const Hero = ({ locale }: { locale: Locale }) => {
         aria-hidden="true"
         className="pointer-events-none absolute right-[-10%] top-0 h-[38rem] w-[38rem] rounded-full bg-accent-soft opacity-70 blur-[110px]"
       />
+
+      {/* Malha de pontos guiada pelo ponteiro. Decoração: nasce depois da
+          hidratação, atrás do conteúdo, e some no movimento reduzido. */}
+      <ParticleField className="field-mask" />
 
       <div className="shell relative grid gap-14 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">

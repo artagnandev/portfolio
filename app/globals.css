@@ -164,6 +164,23 @@
   .tilt-scene { perspective: 1100px; }
 
   /*
+   * A malha de pontos é textura de fundo: a máscara decide de onde o campo
+   * nasce e o faz sumir antes de encostar no texto e nas bordas. A escala do
+   * ponto é a mesma no site inteiro — o que muda de um lugar para outro é só
+   * o foco, por `--field-x` / `--field-y`. O padrão é o do hero, atrás do
+   * retrato.
+   */
+  .field-mask {
+    --field-x: 72%;
+    --field-y: 34%;
+    mask-image: radial-gradient(
+      115% 92% at var(--field-x) var(--field-y),
+      black 28%,
+      transparent 76%
+    );
+  }
+
+  /*
    * Entrada da dobra inicial em CSS puro. Precisa ser CSS e não Motion:
    * o Motion só revela após a hidratação, o que deixaria o <h1> — elemento
    * de LCP — invisível esperando JavaScript. Aqui a animação começa no

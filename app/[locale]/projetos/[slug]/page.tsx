@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ExternalLink, GitBranch } from "lucide-react";
+import { ParticleField } from "@/components/motion/particle-field";
 import { Reveal } from "@/components/motion/reveal";
 import { Tag } from "@/components/primitives/tag";
 import { dictionary } from "@/content/dictionary";
@@ -52,36 +53,46 @@ const Page = async ({ params }: { params: Promise<RouteParams> }) => {
 
   return (
     <article className="pb-24 pt-32 sm:pt-36">
-      <div className="shell">
-        <Link
-          href={`/${locale}#work`}
-          className="rise inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-accent"
-        >
-          <ArrowLeft size={14} aria-hidden="true" />
-          {t(dictionary.actions.backToWork, locale)}
-        </Link>
+      {/*
+       * Cabeçalho do projeto: é a dobra desta página, então repete o campo do
+       * hero da home — com o foco à direita, no vazio que o título de uma
+       * coluna deixa. O canvas para aqui: cobrir o artigo inteiro seria uma
+       * malha de milhares de pontos por nada.
+       */}
+      <header className="relative overflow-hidden">
+        <ParticleField className="field-mask [--field-x:84%] [--field-y:46%]" />
 
-        <p className="eyebrow rise mt-10">
-          {t(project.segment, locale)} · {project.period} ·{" "}
-          <span className="whitespace-nowrap">
-            {t(dictionary.labels.deliveredAt, locale)}{" "}
-            <a
-              href={agency.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink transition-colors hover:text-accent"
-            >
-              {agency.name}
-            </a>
-          </span>
-        </p>
+        <div className="shell relative">
+          <Link
+            href={`/${locale}#work`}
+            className="rise inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-accent"
+          >
+            <ArrowLeft size={14} aria-hidden="true" />
+            {t(dictionary.actions.backToWork, locale)}
+          </Link>
 
-        <h1 className="rise-1 mt-4 text-step-5 sm:text-step-6">{project.title}</h1>
+          <p className="eyebrow rise mt-10">
+            {t(project.segment, locale)} · {project.period} ·{" "}
+            <span className="whitespace-nowrap">
+              {t(dictionary.labels.deliveredAt, locale)}{" "}
+              <a
+                href={agency.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink transition-colors hover:text-accent"
+              >
+                {agency.name}
+              </a>
+            </span>
+          </p>
 
-        <p className="measure rise-2 mt-6 text-step-1 text-ink-muted">
-          {t(project.summary, locale)}
-        </p>
-      </div>
+          <h1 className="rise-1 mt-4 text-step-5 sm:text-step-6">{project.title}</h1>
+
+          <p className="measure rise-2 mt-6 text-step-1 text-ink-muted">
+            {t(project.summary, locale)}
+          </p>
+        </div>
+      </header>
 
       {cover && (
         <div className="shell mt-14">
