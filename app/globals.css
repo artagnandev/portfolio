@@ -121,7 +121,14 @@
   time, .tabular { font-variant-numeric: tabular-nums; }
 }
 
-@layer utilities {
+/*
+ * Camada `components`, não `utilities`: estas classes têm a mesma
+ * especificidade das utilitárias do Tailwind e são emitidas depois delas, então
+ * na camada utilities venciam por ordem — `.eyebrow` matava `text-accent` e
+ * `.shell` matava `max-w-3xl`. Em `components` a cascata volta ao esperado:
+ * qualquer utilitária do Tailwind sobrescreve o que está aqui.
+ */
+@layer components {
   .shell {
     width: 100%;
     max-width: var(--shell);
