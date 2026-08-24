@@ -12,6 +12,12 @@ Nenhuma string de interface em JSX. Todo texto vem de `content/` como `Record<Lo
 - `text-ink-faint` não passa em contraste AA para texto pequeno — usar só em decoração ou texto ≥ 24px.
 - Movimento sempre via `components/motion/*`, que já respeita `prefers-reduced-motion`.
 - Motion se importa como `m` de `motion/react`, nunca `motion` — o `LazyMotion` está em modo `strict` e quebra em runtime se o componente completo for usado.
+- Classe própria de estilo (`.shell`, `.eyebrow`, `.section-title`, `.rise*`…) vai em `@layer components`, **nunca** em `@layer utilities`: na camada `utilities` ela tem a mesma especificidade das utilitárias do Tailwind e vence por ordem de emissão, matando em silêncio um `text-accent` ou um `max-w-3xl` aplicado no JSX.
+- Componente com `<canvas>` ou animação por quadro (`motion/particle-field.tsx`) precisa de: `aria-hidden`, `pointer-events-none`, parada por `IntersectionObserver` fora da tela e nenhuma medição de geometria fora do quadro de `requestAnimationFrame`.
+
+## Metadados
+
+Toda rota nova declara `alternates: alternatesFor(locale, subpath)` **e** o próprio `openGraph` (title, description, `url`). Sem o bloco `openGraph`, a rota herda o da home e todo link compartilhado desunfurla como página inicial.
 
 ## Regra de LCP
 
