@@ -1,106 +1,250 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: oklch(0.13 0.01 240);
-  --foreground: oklch(0.95 0.01 240);
-  --card: oklch(0.17 0.01 240);
-  --card-foreground: oklch(0.95 0.01 240);
-  --popover: oklch(0.17 0.01 240);
-  --popover-foreground: oklch(0.95 0.01 240);
-  --primary: oklch(0.75 0.15 175);
-  --primary-foreground: oklch(0.13 0.01 240);
-  --secondary: oklch(0.22 0.01 240);
-  --secondary-foreground: oklch(0.85 0.01 240);
-  --muted: oklch(0.20 0.01 240);
-  --muted-foreground: oklch(0.60 0.02 240);
-  --accent: oklch(0.75 0.15 175);
-  --accent-foreground: oklch(0.13 0.01 240);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.25 0.015 240);
-  --input: oklch(0.25 0.015 240);
-  --ring: oklch(0.75 0.15 175);
-  --chart-1: oklch(0.75 0.15 175);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.17 0.01 240);
-  --sidebar-foreground: oklch(0.95 0.01 240);
-  --sidebar-primary: oklch(0.75 0.15 175);
-  --sidebar-primary-foreground: oklch(0.13 0.01 240);
-  --sidebar-accent: oklch(0.22 0.01 240);
-  --sidebar-accent-foreground: oklch(0.85 0.01 240);
-  --sidebar-border: oklch(0.25 0.015 240);
-  --sidebar-ring: oklch(0.75 0.15 175);
+  --paper: oklch(0.972 0.0075 84);
+  --paper-raised: oklch(0.988 0.005 84);
+  --ink: oklch(0.205 0.012 62);
+  --ink-muted: oklch(0.505 0.014 62);
+  --ink-faint: oklch(0.700 0.012 62);
+  --rule: oklch(0.885 0.010 74);
+  --accent: oklch(0.505 0.165 32);
+  --accent-soft: oklch(0.940 0.030 42);
+  --accent-contrast: oklch(0.985 0.006 84);
+
+  --step--1: clamp(0.833rem, 0.80rem + 0.16vw, 0.94rem);
+  --step-0:  clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+  --step-1:  clamp(1.2rem, 1.13rem + 0.35vw, 1.42rem);
+  --step-2:  clamp(1.44rem, 1.33rem + 0.55vw, 1.80rem);
+  --step-3:  clamp(1.73rem, 1.55rem + 0.87vw, 2.27rem);
+  --step-4:  clamp(2.07rem, 1.81rem + 1.32vw, 2.87rem);
+  --step-5:  clamp(2.49rem, 2.09rem + 1.98vw, 3.62rem);
+  --step-6:  clamp(2.99rem, 2.41rem + 2.88vw, 4.58rem);
+  --step-7:  clamp(3.58rem, 2.77rem + 4.08vw, 5.78rem);
+
+  --ease-editorial: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 200ms;
+  --dur: 400ms;
+  --dur-slow: 700ms;
+
+  --measure: 62ch;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --shell: 72rem;
+}
+
+.dark {
+  --paper: oklch(0.165 0.010 62);
+  --paper-raised: oklch(0.205 0.011 62);
+  --ink: oklch(0.955 0.008 84);
+  --ink-muted: oklch(0.715 0.012 74);
+  --ink-faint: oklch(0.520 0.012 74);
+  --rule: oklch(0.285 0.012 62);
+  --accent: oklch(0.720 0.145 42);
+  --accent-soft: oklch(0.260 0.045 38);
+  --accent-contrast: oklch(0.160 0.010 62);
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --font-display: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  --font-sans: var(--font-instrument), 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+
+  --text-step--1: var(--step--1);
+  --text-step-0: var(--step-0);
+  --text-step-1: var(--step-1);
+  --text-step-2: var(--step-2);
+  --text-step-3: var(--step-3);
+  --text-step-4: var(--step-4);
+  --text-step-5: var(--step-5);
+  --text-step-6: var(--step-6);
+  --text-step-7: var(--step-7);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) transparent;
+  *,
+  *::before,
+  *::after {
+    border-color: var(--rule);
   }
-  *::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  *::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    border-radius: 9999px;
-  }
+
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
+
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--step-0);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* WONK ligado dá o itálico angular característico da Fraunces. */
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-variation-settings: 'WONK' 1;
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  /* Números tabulares em qualquer estatística ou período. */
+  time, .tabular { font-variant-numeric: tabular-nums; }
+}
+
+/*
+ * Camada `components`, não `utilities`: estas classes têm a mesma
+ * especificidade das utilitárias do Tailwind e são emitidas depois delas, então
+ * na camada utilities venciam por ordem — `.eyebrow` matava `text-accent` e
+ * `.shell` matava `max-w-3xl`. Em `components` a cascata volta ao esperado:
+ * qualquer utilitária do Tailwind sobrescreve o que está aqui.
+ */
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: var(--shell);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .measure { max-width: var(--measure); }
+
+  /*
+   * Título de seção: a quebra em duas linhas vem do conteúdo (o "\n" em
+   * content/dictionary.ts), então `white-space: pre-line` a preserva e o
+   * `balance` herdado de h2 precisa sair — ele reequilibraria as linhas e
+   * desfaria a quebra editorial. Telas estreitas ainda podem quebrar mais.
+   */
+  .section-title {
+    white-space: pre-line;
+    text-wrap: pretty;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* Textura de papel: ruído sutil, custo zero de rede. */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .tilt-scene { perspective: 1100px; }
+
+  /*
+   * A malha de pontos é textura de fundo: a máscara decide de onde o campo
+   * nasce e o faz sumir antes de encostar no texto e nas bordas. A escala do
+   * ponto é a mesma no site inteiro — o que muda de um lugar para outro é só
+   * o foco, por `--field-x` / `--field-y`. O padrão é o do hero, atrás do
+   * retrato.
+   */
+  .field-mask {
+    --field-x: 72%;
+    --field-y: 34%;
+    mask-image: radial-gradient(
+      115% 92% at var(--field-x) var(--field-y),
+      black 28%,
+      transparent 76%
+    );
+  }
+
+  /*
+   * Entrada da dobra inicial em CSS puro. Precisa ser CSS e não Motion:
+   * o Motion só revela após a hidratação, o que deixaria o <h1> — elemento
+   * de LCP — invisível esperando JavaScript. Aqui a animação começa no
+   * primeiro paint. Motion fica para o que está abaixo da dobra.
+   */
+  .rise { animation: rise var(--dur-slow) var(--ease-expo) both; }
+  .rise-1 { animation: rise var(--dur-slow) var(--ease-expo) 80ms both; }
+  .rise-2 { animation: rise var(--dur-slow) var(--ease-expo) 160ms both; }
+  .rise-3 { animation: rise var(--dur-slow) var(--ease-expo) 240ms both; }
+  .rise-4 { animation: rise var(--dur-slow) var(--ease-expo) 320ms both; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/*
+ * View Transitions — a capa do projeto morfa do card da home para o hero da
+ * página de detalhe. O par é declarado em React, com <ViewTransition name>;
+ * aqui fica só o tempo e o acabamento da animação.
+ */
+
+/* O overlay da transição captura o ponteiro; devolve o clique à página viva. */
+::view-transition { pointer-events: none; }
+
+/* Header ancorado: o conteúdo troca, a barra fixa não se mexe nem pisca. */
+[data-site-header] { view-transition-name: site-header; }
+::view-transition-group(site-header) { animation: none; z-index: 100; }
+::view-transition-old(site-header) { display: none; }
+::view-transition-new(site-header) { animation: none; }
+
+/* Classe atribuída pelo `share="morph"` da capa. */
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-slow);
+  animation-timing-function: var(--ease-expo);
+}
+::view-transition-image-pair(.morph) { animation-name: morph-blur; }
+
+/* O blur esconde o artefato de interpolação entre as duas resoluções. */
+@keyframes morph-blur {
+  30% { filter: blur(3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Os pseudo-elementos de view transition não são alcançados por `*`. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
   }
 }
