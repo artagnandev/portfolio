@@ -16,7 +16,7 @@ export const Projects = ({ locale }: { locale: Locale }) => (
       <Rule label={t(dictionary.sections.workEyebrow, locale)} className="mb-12" />
 
       <Reveal>
-        <h2 id="work-title" className="mb-16 text-step-4">
+        <h2 id="work-title" className="section-title mb-16 text-step-4">
           {t(dictionary.sections.workTitle, locale)}
         </h2>
       </Reveal>

@@ -12,7 +12,7 @@ export const Experience = ({ locale }: { locale: Locale }) => (
       <Rule label={t(dictionary.sections.experienceEyebrow, locale)} className="mb-12" />
 
       <Reveal>
-        <h2 id="experience-title" className="mb-16 text-step-4">
+        <h2 id="experience-title" className="section-title mb-16 text-step-4">
           {t(dictionary.sections.experienceTitle, locale)}
         </h2>
       </Reveal>

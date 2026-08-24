@@ -131,6 +131,17 @@
 
   .measure { max-width: var(--measure); }
 
+  /*
+   * Título de seção: a quebra em duas linhas vem do conteúdo (o "\n" em
+   * content/dictionary.ts), então `white-space: pre-line` a preserva e o
+   * `balance` herdado de h2 precisa sair — ele reequilibraria as linhas e
+   * desfaria a quebra editorial. Telas estreitas ainda podem quebrar mais.
+   */
+  .section-title {
+    white-space: pre-line;
+    text-wrap: pretty;
+  }
+
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.6875rem;

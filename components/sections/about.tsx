@@ -11,7 +11,7 @@ export const About = ({ locale }: { locale: Locale }) => (
 
       <div className="grid gap-12 lg:grid-cols-12">
         <Reveal className="lg:col-span-7">
-          <h2 id="about-title" className="text-step-4">
+          <h2 id="about-title" className="section-title text-step-4">
             {t(dictionary.sections.aboutTitle, locale)}
           </h2>
         </Reveal>

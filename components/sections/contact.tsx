@@ -12,7 +12,7 @@ export const Contact = ({ locale }: { locale: Locale }) => (
 
       <div className="grid gap-12 lg:grid-cols-12">
         <Reveal className="lg:col-span-6">
-          <h2 id="contact-title" className="text-step-5">
+          <h2 id="contact-title" className="section-title text-step-5">
             {t(dictionary.sections.contactTitle, locale)}
           </h2>
           <p className="measure mt-6 text-ink-muted">

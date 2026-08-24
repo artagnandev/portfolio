@@ -47,23 +47,29 @@ export const dictionary = {
     closeMenu: text("Fechar menu", "Close menu"),
     home: text("Voltar ao topo", "Back to top"),
   },
+  /*
+   * Os títulos de seção quebram em duas linhas por decisão editorial: o "\n" é
+   * a quebra, respeitada pelo utilitário `.section-title` (white-space:
+   * pre-line). Vale só no site — o currículo monta seus blocos com
+   * `dictionary.nav` e `dictionary.labels`, que seguem em linha única.
+   */
   sections: {
     aboutEyebrow: text("Sobre", "About"),
     aboutTitle: text(
-      "Front-end de ponta a ponta, do Figma ao deploy",
-      "End-to-end front-end, from Figma to deploy",
+      "Front-end de ponta a ponta,\ndo Figma ao deploy",
+      "End-to-end front-end,\nfrom Figma to deploy",
     ),
     experienceEyebrow: text("Experiência", "Experience"),
     experienceTitle: text(
-      "De desenvolvedor a Front-end Lead em seis anos",
-      "From developer to Front-end Lead in six years",
+      "De desenvolvedor a Front-end Lead\nem seis anos",
+      "From developer to Front-end Lead\nin six years",
     ),
     skillsEyebrow: text("Competências", "Skills"),
-    skillsTitle: text("Ferramentas e prática", "Tools and practice"),
+    skillsTitle: text("Ferramentas\ne prática", "Tools\nand practice"),
     workEyebrow: text("Projetos", "Projects"),
-    workTitle: text("Produtos em produção", "Products in production"),
+    workTitle: text("Produtos\nem produção", "Products\nin production"),
     contactEyebrow: text("Contato", "Contact"),
-    contactTitle: text("Vamos conversar", "Let's talk"),
+    contactTitle: text("Vamos\nconversar", "Let's\ntalk"),
     contactBody: text(
       "Estou aberto a posições de liderança técnica em front-end, remotas ou híbridas. Respondo em até um dia útil.",
       "I'm open to front-end technical leadership roles, remote or hybrid. I reply within one business day.",
