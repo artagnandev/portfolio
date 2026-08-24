@@ -76,6 +76,7 @@ export const dictionary = {
     ),
   },
   labels: {
+    primaryNav: text("Navegação principal", "Primary navigation"),
     current: text("Atual", "Current"),
     present: text("Presente", "Present"),
     stack: text("Stack", "Stack"),

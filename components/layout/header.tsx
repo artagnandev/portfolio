@@ -6,18 +6,10 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { dictionary } from "@/content/dictionary";
-import { otherLocale, t, type Locale } from "@/lib/i18n";
+import { htmlLang, otherLocale, t, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const sections = ["about", "experience", "skills", "work", "contact"] as const;
-
-const anchors: Record<(typeof sections)[number], string> = {
-  about: "#about",
-  experience: "#experience",
-  skills: "#skills",
-  work: "#work",
-  contact: "#contact",
-};
 
 export const Header = ({ locale }: { locale: Locale }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -43,6 +35,9 @@ export const Header = ({ locale }: { locale: Locale }) => {
 
   const target = otherLocale(locale);
   const swapPath = pathname.replace(`/${locale}`, `/${target}`);
+  // A âncora precisa carregar a rota da home: as seções só existem lá, e o
+  // header também é renderizado em /curriculo e nas páginas de projeto.
+  const anchor = (section: string) => `/${locale}#${section}`;
 
   return (
     <>
@@ -65,15 +60,18 @@ export const Header = ({ locale }: { locale: Locale }) => {
           DA<span className="text-accent">.</span>
         </Link>
 
-        <nav className="hidden items-center gap-9 md:flex" aria-label="Principal">
+        <nav
+          className="hidden items-center gap-9 md:flex"
+          aria-label={t(dictionary.labels.primaryNav, locale)}
+        >
           {sections.map((section) => (
-            <a
+            <Link
               key={section}
-              href={anchors[section]}
+              href={anchor(section)}
               className="text-sm text-ink-muted transition-colors hover:text-accent"
             >
               {t(dictionary.nav[section], locale)}
-            </a>
+            </Link>
           ))}
           <Link
             href={`/${locale}/curriculo`}
@@ -86,7 +84,7 @@ export const Header = ({ locale }: { locale: Locale }) => {
         <div className="flex items-center gap-1">
           <Link
             href={swapPath}
-            hrefLang={target}
+            hrefLang={htmlLang[target]}
             className="px-2.5 py-2 font-mono text-xs uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-accent"
             aria-label={t(dictionary.actions.switchLanguage, locale)}
           >
@@ -122,17 +120,21 @@ export const Header = ({ locale }: { locale: Locale }) => {
       </div>
 
       {open && (
-        <nav id="mobile-nav" className="border-t border-rule bg-paper md:hidden" aria-label="Principal">
+        <nav
+          id="mobile-nav"
+          className="border-t border-rule bg-paper md:hidden"
+          aria-label={t(dictionary.labels.primaryNav, locale)}
+        >
           <ul className="shell flex flex-col py-3">
             {sections.map((section) => (
               <li key={section}>
-                <a
-                  href={anchors[section]}
+                <Link
+                  href={anchor(section)}
                   onClick={() => setOpen(false)}
                   className="block border-b border-rule/60 py-4 font-display text-step-1"
                 >
                   {t(dictionary.nav[section], locale)}
-                </a>
+                </Link>
               </li>
             ))}
             <li>
