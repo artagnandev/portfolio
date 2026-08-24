@@ -100,57 +100,105 @@ export const experiences: Experience[] = [
 export const skillGroups: SkillGroup[] = [
   {
     label: { pt: "Linguagens", en: "Languages" },
-    items: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
+    items: {
+      pt: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
+      en: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
+    },
   },
   {
     label: { pt: "Frameworks e bibliotecas", en: "Frameworks and libraries" },
-    items: [
-      "React",
-      "Next.js",
-      "React Native",
-      "Tailwind CSS",
-      "Material UI",
-      "Shadcn UI",
-      "TanStack Table",
-      "WordPress",
-    ],
+    items: {
+      pt: [
+        "React",
+        "Next.js",
+        "React Native",
+        "Tailwind CSS",
+        "Material UI",
+        "Shadcn UI",
+        "TanStack Table",
+        "WordPress",
+      ],
+      en: [
+        "React",
+        "Next.js",
+        "React Native",
+        "Tailwind CSS",
+        "Material UI",
+        "Shadcn UI",
+        "TanStack Table",
+        "WordPress",
+      ],
+    },
   },
   {
     label: { pt: "Integração e dados", en: "Integration and data" },
-    items: [
-      "APIs REST",
-      "Autenticação JWT",
-      "Gerenciamento de estado",
-      "Custom hooks",
-      "Sincronização offline/online",
-    ],
+    items: {
+      pt: [
+        "APIs REST",
+        "Autenticação JWT",
+        "Gerenciamento de estado",
+        "Custom hooks",
+        "Sincronização offline/online",
+      ],
+      en: [
+        "REST APIs",
+        "JWT authentication",
+        "State management",
+        "Custom hooks",
+        "Offline/online sync",
+      ],
+    },
   },
   {
     label: { pt: "Engenharia", en: "Engineering" },
-    items: [
-      "Clean Code",
-      "Design systems",
-      "Code review",
-      "Responsive design",
-      "Acessibilidade (ARIA, WCAG)",
-      "Web performance",
-      "SEO On-Page",
-      "Desenvolvimento assistido por IA",
-      "Guard-rails para agentes",
-    ],
+    items: {
+      pt: [
+        "Clean Code",
+        "Design systems",
+        "Code review",
+        "Responsive design",
+        "Acessibilidade (ARIA, WCAG)",
+        "Web performance",
+        "SEO On-Page",
+        "Desenvolvimento assistido por IA",
+        "Guard-rails para agentes",
+      ],
+      en: [
+        "Clean Code",
+        "Design systems",
+        "Code review",
+        "Responsive design",
+        "Accessibility (ARIA, WCAG)",
+        "Web performance",
+        "On-page SEO",
+        "AI-assisted development",
+        "Guard-rails for agents",
+      ],
+    },
   },
   {
     label: { pt: "Ferramentas", en: "Tooling" },
-    items: ["Git", "GitHub", "Figma", "Chrome DevTools", "Vercel", "Node.js", "npm", "bun"],
+    items: {
+      pt: ["Git", "GitHub", "Figma", "Chrome DevTools", "Vercel", "Node.js", "npm", "bun"],
+      en: ["Git", "GitHub", "Figma", "Chrome DevTools", "Vercel", "Node.js", "npm", "bun"],
+    },
   },
   {
     label: { pt: "Liderança", en: "Leadership" },
-    items: [
-      "Liderança técnica",
-      "Mentoria",
-      "Comunicação com stakeholders",
-      "Levantamento de requisitos",
-    ],
+    items: {
+      pt: [
+        "Liderança técnica",
+        "Mentoria",
+        "Comunicação com stakeholders",
+        "Levantamento de requisitos",
+      ],
+      en: [
+        "Technical leadership",
+        "Mentoring",
+        "Stakeholder communication",
+        "Requirements gathering",
+      ],
+    },
   },
 ];
 

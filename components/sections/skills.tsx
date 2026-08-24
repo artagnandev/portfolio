@@ -23,7 +23,7 @@ export const Skills = ({ locale }: { locale: Locale }) => (
               {t(group.label, locale)}
             </h3>
             <ul className="mt-5 space-y-2">
-              {group.items.map((item) => (
+              {t(group.items, locale).map((item) => (
                 <li key={item} className="text-step--1 text-ink-muted">
                   {item}
                 </li>

@@ -107,3 +107,18 @@ describe("stats", () => {
     }
   });
 });
+
+describe("skills", () => {
+  // A lista de competências é o lugar onde texto em português mais escapou
+  // para /en: metade dos itens é nome próprio e passa igual nos dois idiomas.
+  it("lista os mesmos itens nos dois idiomas, na mesma ordem", () => {
+    for (const group of skillGroups) {
+      expect(group.items.en).toHaveLength(group.items.pt.length);
+      for (const locale of locales) {
+        for (const item of group.items[locale]) {
+          expect(item.trim().length).toBeGreaterThan(0);
+        }
+      }
+    }
+  });
+});

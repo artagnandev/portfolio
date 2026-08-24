@@ -101,7 +101,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
           {skillGroups.map((group) => (
             <div key={group.label.pt} className="text-step--1">
               <dt className="inline font-semibold">{t(group.label, locale)}: </dt>
-              <dd className="inline text-ink-muted">{group.items.join(", ")}</dd>
+              <dd className="inline text-ink-muted">{t(group.items, locale).join(", ")}</dd>
             </div>
           ))}
         </dl>

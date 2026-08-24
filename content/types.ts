@@ -37,7 +37,12 @@ export type EducationEntry = {
 
 export type SkillGroup = {
   label: LocalizedText;
-  items: string[];
+  /**
+   * Localizado, não `string[]`: a lista mistura nome próprio ("React", que
+   * nunca muda) com competência escrita ("Gerenciamento de estado"), e a
+   * segunda precisa da versão em inglês.
+   */
+  items: LocalizedList;
 };
 
 export type ProjectImage = {
