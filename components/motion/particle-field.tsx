@@ -46,6 +46,7 @@ export const ParticleField = ({ className }: ParticleFieldProps) => {
     const target = { x: 0, y: 0, strength: 0 };
     const lens = { x: 0, y: 0, strength: 0 };
     const client = { x: 0, y: 0, tracking: false };
+    let pendingSync = false;
 
     // Cores saem dos tokens, então o tema claro/escuro é respeitado de graça.
     const palette = { base: "", lens: "" };
@@ -123,13 +124,43 @@ export const ParticleField = ({ className }: ParticleFieldProps) => {
       context.globalAlpha = 1;
     };
 
+    // Onde o cursor cai dentro do canvas agora. Lê geometria, então só roda a
+    // partir de um evento de ponteiro ou de dentro do quadro.
+    const measure = () => {
+      const rect = canvas.getBoundingClientRect();
+      const x = client.x - rect.left;
+      const y = client.y - rect.top;
+      const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
+
+      target.strength = inside ? 1 : 0;
+
+      if (inside) {
+        target.x = x;
+        target.y = y;
+        // Ao entrar do zero, a lente nasce sob o cursor em vez de atravessar
+        // a tela até ele.
+        if (lens.strength < 0.01) {
+          lens.x = x;
+          lens.y = y;
+        }
+      }
+    };
+
     const tick = () => {
+      // Medir dentro do quadro: o scroll dispara muito mais vezes do que o
+      // navegador pinta, e cada medição força um reflow.
+      if (pendingSync) {
+        pendingSync = false;
+        measure();
+      }
+
       lens.x += (target.x - lens.x) * FOLLOW;
       lens.y += (target.y - lens.y) * FOLLOW;
       lens.strength += (target.strength - lens.strength) * FADE;
 
       const drift = Math.abs(target.x - lens.x) + Math.abs(target.y - lens.y);
-      const settled = drift < 0.4 && Math.abs(target.strength - lens.strength) < 0.002;
+      const settled =
+        !pendingSync && drift < 0.4 && Math.abs(target.strength - lens.strength) < 0.002;
 
       if (settled) {
         // Encosta no alvo e para: quadro parado não precisa de rAF.
@@ -205,40 +236,21 @@ export const ParticleField = ({ className }: ParticleFieldProps) => {
       };
     }
 
-    const sync = () => {
-      const rect = canvas.getBoundingClientRect();
-      const x = client.x - rect.left;
-      const y = client.y - rect.top;
-      const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
-
-      target.strength = inside ? 1 : 0;
-
-      if (inside) {
-        target.x = x;
-        target.y = y;
-        // Ao entrar do zero, a lente nasce sob o cursor em vez de atravessar
-        // a tela até ele.
-        if (lens.strength < 0.01) {
-          lens.x = x;
-          lens.y = y;
-        }
-      }
-
-      run();
-    };
-
     const handleMove = (event: PointerEvent) => {
       // Só ponteiro fino: em touch não há cursor para seguir.
       if (event.pointerType !== "mouse" || !visible) return;
       client.x = event.clientX;
       client.y = event.clientY;
       client.tracking = true;
-      sync();
+      measure();
+      run();
     };
 
     // A página rola sob o cursor parado — a lente tem de acompanhar.
     const handleScroll = () => {
-      if (client.tracking && visible) sync();
+      if (!client.tracking || !visible) return;
+      pendingSync = true;
+      run();
     };
 
     const release = () => {

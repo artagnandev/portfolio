@@ -25,7 +25,7 @@ export const Hero = ({ locale }: { locale: Locale }) => {
       />
 
       {/* Malha de pontos guiada pelo ponteiro. Decoração: nasce depois da
-          hidratação, atrás do conteúdo, e some no movimento reduzido. */}
+          hidratação, atrás do conteúdo, e fica parada no movimento reduzido. */}
       <ParticleField className="field-mask" />
 
       <div className="shell relative grid gap-14 lg:grid-cols-12 lg:items-end">
@@ -97,7 +97,7 @@ export const Hero = ({ locale }: { locale: Locale }) => {
         <dl className="grid gap-x-12 gap-y-9 sm:grid-cols-2">
           {stats.map((stat, index) => (
             <div
-              key={stat.value + stat.label.pt}
+              key={stat.value}
               className={index === 0 ? undefined : "sm:border-l sm:border-rule sm:pl-12"}
             >
               <dt className="sr-only">{t(stat.label, locale)}</dt>
