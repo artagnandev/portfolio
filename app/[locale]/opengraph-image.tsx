@@ -1,10 +1,13 @@
 import { ImageResponse } from "next/og";
 import { profile, stats } from "@/content/profile";
-import { isLocale, t } from "@/lib/i18n";
+import { isLocale, locales, t } from "@/lib/i18n";
 
 export const alt = "David Artagnan — Front-end Lead";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+// Sem isto a rota fica dinâmica e o PNG é rasterizado a cada compartilhamento.
+export const generateStaticParams = () => locales.map((locale) => ({ locale }));
 
 const OpenGraphImage = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale: raw } = await params;
