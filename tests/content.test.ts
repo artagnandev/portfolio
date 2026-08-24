@@ -10,6 +10,7 @@ import {
   skillGroups,
 } from "@/content/resume";
 import { projects } from "@/content/projects";
+import { stats } from "@/content/profile";
 import { locales } from "@/lib/i18n";
 
 describe("resume", () => {
@@ -85,6 +86,24 @@ describe("projects", () => {
     for (const project of projects) {
       if (project.liveUrl) expect(project.liveUrl).toMatch(/^https:\/\//);
       if (project.repoUrl) expect(project.repoUrl).toMatch(/^https:\/\//);
+    }
+  });
+});
+
+describe("stats", () => {
+  // O <CountUp> do hero anima `Number.parseInt` do valor sem o "+"; qualquer
+  // outro formato ("35%", "6+") sairia na tela como NaN ou perderia o sufixo.
+  it("usa apenas dígitos, com um \"+\" opcional à frente", () => {
+    for (const stat of stats) {
+      expect(stat.value).toMatch(/^\+?\d+$/);
+    }
+  });
+
+  it("rotula cada número nos dois idiomas", () => {
+    for (const stat of stats) {
+      for (const locale of locales) {
+        expect(stat.label[locale].trim().length).toBeGreaterThan(0);
+      }
     }
   });
 });

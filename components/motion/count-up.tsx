@@ -19,7 +19,9 @@ export const CountUp = ({ value, className }: CountUpProps) => {
   const digits = value.slice(prefix.length);
   const target = Number.parseInt(digits, 10);
   const pad = digits.length;
-  const [count, setCount] = useState(0);
+  // `null` até a animação começar: no HTML do servidor (e sem JS) o número
+  // precisa sair pronto — começar em 0 publicava "00" para quem não hidrata.
+  const [count, setCount] = useState<number | null>(null);
 
   const animatable = !reduced && !Number.isNaN(target);
 
@@ -36,8 +38,10 @@ export const CountUp = ({ value, className }: CountUpProps) => {
     return () => controls.stop();
   }, [inView, animatable, target]);
 
-  // Sem animação (movimento reduzido ou valor não numérico), mostra o final direto.
-  const display = animatable ? prefix + String(count).padStart(pad, "0") : value;
+  // Sem animação (movimento reduzido, valor não numérico ou antes do primeiro
+  // quadro), mostra o valor final direto.
+  const display =
+    animatable && count !== null ? prefix + String(count).padStart(pad, "0") : value;
 
   return (
     <span ref={ref} className={className}>
