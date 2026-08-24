@@ -39,6 +39,10 @@ const jetbrains = JetBrains_Mono({
 
 export const generateStaticParams = () => locales.map((locale) => ({ locale }));
 
+// O ano do rodapé é resolvido no build; sem revalidação ele congelaria no HTML
+// até o próximo deploy. Um dia é folgado para o único conteúdo que envelhece.
+export const revalidate = 86400;
+
 export const generateMetadata = async ({
   params,
 }: {
