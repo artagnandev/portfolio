@@ -81,16 +81,28 @@ export const Hero = ({ locale }: { locale: Locale }) => {
         </figure>
       </div>
 
+      {/*
+       * São dois números apenas. Em vez de uma grade de colunas estreitas, cada
+       * um ocupa metade da faixa com o valor grande e o rótulo centrado no eixo
+       * vertical — a divisória vertical faz o papel que as colunas faziam antes.
+       * Centrar (e não alinhar pela base) evita que o rótulo de três linhas
+       * fique pendurado abaixo do número.
+       */}
       <div className="shell relative mt-20 border-t border-rule pt-10">
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.value + stat.label.pt}>
+        <dl className="grid gap-x-12 gap-y-9 sm:grid-cols-2">
+          {stats.map((stat, index) => (
+            <div
+              key={stat.value + stat.label.pt}
+              className={index === 0 ? undefined : "sm:border-l sm:border-rule sm:pl-12"}
+            >
               <dt className="sr-only">{t(stat.label, locale)}</dt>
-              <dd>
-                <span className="tabular font-display text-step-5 leading-none">
+              <dd className="flex items-center gap-5">
+                <span className="tabular font-display text-step-6 leading-none">
                   <CountUp value={stat.value} />
                 </span>
-                <span className="eyebrow mt-3 block">{t(stat.label, locale)}</span>
+                <span className="eyebrow max-w-[26ch] text-balance leading-[1.6]">
+                  {t(stat.label, locale)}
+                </span>
               </dd>
             </div>
           ))}

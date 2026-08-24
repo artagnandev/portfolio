@@ -40,11 +40,19 @@ export const agency = {
   url: "https://www.flowlabtech.com.br/",
 } as const;
 
+/**
+ * Dois números apenas — os únicos verificáveis. A faixa do hero, o currículo e
+ * a imagem de OG leem daqui; o layout de cada um assume exatamente dois itens.
+ */
 export const stats: Stat[] = [
-  { value: "06", label: { pt: "anos de experiência", en: "years of experience" } },
-  { value: "05", label: { pt: "produtos em produção", en: "products in production" } },
-  { value: "35", label: { pt: "funcionalidades entregues", en: "features shipped" } },
-  { value: "28", label: { pt: "telas do Figma ao deploy", en: "screens from Figma to deploy" } },
+  {
+    value: "06",
+    label: { pt: "anos de experiência", en: "years of experience" },
+  },
+  {
+    value: "+70",
+    label: { pt: "projetos entregues em web e mobile", en: "projects delivered across web and mobile" },
+  },
 ];
 
 export const contactChannels: ContactChannel[] = [

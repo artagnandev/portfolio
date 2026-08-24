@@ -9,8 +9,8 @@ export const dictionary = {
       "David Artagnan — Front-end Lead | React, Next.js, TypeScript",
     ),
     description: text(
-      "Front-end Lead com 6 anos de experiência em React, Next.js, React Native e TypeScript. 5 produtos em produção, 35 funcionalidades e 28 telas entregues do Figma ao deploy. Uberlândia, MG — remoto e híbrido.",
-      "Front-end Lead with 6 years of experience in React, Next.js, React Native and TypeScript. 5 products in production, 35 features and 28 screens delivered from Figma to deploy. Based in Brazil — open to remote work.",
+      "Front-end Lead com 6 anos de experiência em React, Next.js, React Native e TypeScript. Mais de 70 projetos web e mobile entregues do Figma ao deploy. Uberlândia, MG — remoto e híbrido.",
+      "Front-end Lead with 6 years of experience in React, Next.js, React Native and TypeScript. 70+ web and mobile projects delivered from Figma to deploy. Based in Brazil — open to remote work.",
     ),
     resumeTitle: text(
       "Currículo — David Artagnan, Front-end Lead",
