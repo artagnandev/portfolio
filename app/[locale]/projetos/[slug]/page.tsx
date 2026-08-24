@@ -91,7 +91,7 @@ const Page = async ({ params }: { params: Promise<RouteParams> }) => {
            * elemento nomeado brigaria com o próprio morph.
            */}
           <ViewTransition name={`project-${project.slug}`} share="morph" default="none">
-            <div className="relative aspect-[16/10] w-full overflow-hidden border border-rule bg-paper-raised">
+            <div className="relative aspect-video w-full overflow-hidden border border-rule bg-paper-raised">
               <Image
                 src={cover.src}
                 alt={t(cover.alt, locale)}
@@ -151,7 +151,7 @@ const Page = async ({ params }: { params: Promise<RouteParams> }) => {
               {gallery.map((image) => (
                 <li
                   key={image.src}
-                  className="relative aspect-[16/10] overflow-hidden border border-rule bg-paper-raised"
+                  className="relative aspect-video overflow-hidden border border-rule bg-paper-raised"
                 >
                   <Image
                     src={image.src}

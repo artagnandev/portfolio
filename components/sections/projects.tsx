@@ -45,7 +45,7 @@ export const Projects = ({ locale }: { locale: Locale }) => (
                     share="morph"
                     default="none"
                   >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden border border-rule bg-paper-raised">
+                    <div className="relative aspect-video w-full overflow-hidden border border-rule bg-paper-raised">
                       <Image
                         src={cover.src}
                         alt={t(cover.alt, locale)}
