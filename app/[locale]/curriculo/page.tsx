@@ -16,8 +16,8 @@ import {
 } from "@/content/resume";
 import { projects } from "@/content/projects";
 import { formatMonth } from "@/lib/dates";
-import { isLocale, locales, t, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/site";
+import { htmlLang, isLocale, locales, t, type Locale } from "@/lib/i18n";
+import { absoluteUrl, alternatesFor } from "@/lib/site";
 import "./print.css";
 
 export const generateStaticParams = () => locales.map((locale) => ({ locale }));
@@ -30,10 +30,23 @@ export const generateMetadata = async ({
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
 
+  const title = t(dictionary.meta.resumeTitle, raw);
+  const description = t(dictionary.meta.resumeDescription, raw);
+
   return {
-    title: t(dictionary.meta.resumeTitle, raw),
-    description: t(dictionary.meta.resumeDescription, raw),
+    title,
+    description,
     alternates: alternatesFor(raw, "/curriculo"),
+    // Sem openGraph próprio a página herda o título e a URL da home ao ser
+    // compartilhada.
+    openGraph: {
+      type: "profile",
+      locale: htmlLang[raw].replace("-", "_"),
+      url: absoluteUrl(`${raw}/curriculo`),
+      title,
+      description,
+    },
+    twitter: { card: "summary_large_image", title, description },
   };
 };
 

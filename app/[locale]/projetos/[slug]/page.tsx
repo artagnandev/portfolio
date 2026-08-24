@@ -9,10 +9,10 @@ import { ParticleField } from "@/components/motion/particle-field";
 import { Reveal } from "@/components/motion/reveal";
 import { Tag } from "@/components/primitives/tag";
 import { dictionary } from "@/content/dictionary";
-import { agency } from "@/content/profile";
+import { agency, profile } from "@/content/profile";
 import { projects } from "@/content/projects";
-import { isLocale, locales, t, type Locale } from "@/lib/i18n";
-import { alternatesFor } from "@/lib/site";
+import { htmlLang, isLocale, locales, t, type Locale } from "@/lib/i18n";
+import { absoluteUrl, alternatesFor } from "@/lib/site";
 
 type RouteParams = { locale: string; slug: string };
 
@@ -30,10 +30,30 @@ export const generateMetadata = async ({
   const project = projects.find((entry) => entry.slug === slug);
   if (!project) return {};
 
+  const description = t(project.summary, raw);
+  const url = absoluteUrl(`${raw}/projetos/${slug}`);
+  const cover = project.images[0];
+
   return {
     title: project.title,
-    description: t(project.summary, raw),
+    description,
     alternates: alternatesFor(raw, `/projetos/${slug}`),
+    // Sem isto a página herda o og:title e a og:url da home, e todo link de
+    // projeto compartilhado abre como se fosse a página inicial. A capa entra
+    // no lugar da imagem gerada do locale — é o que identifica o projeto.
+    openGraph: {
+      type: "article",
+      locale: htmlLang[raw].replace("-", "_"),
+      url,
+      title: `${project.title} — ${profile.name}`,
+      description,
+      ...(cover && { images: [{ url: absoluteUrl(cover.src), alt: t(cover.alt, raw) }] }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — ${profile.name}`,
+      description,
+    },
   };
 };
 
